@@ -1,5 +1,5 @@
 ---
-title:  "WhoIs 2주차 과제"
+title:  "WhoIs 웹해킹 2주차 과제"
 
 categories:
   - Blog
@@ -11,4 +11,15 @@ date: 2021-09-20
 last_modified_at: 2021-09-20
 ---
 
-블로그 내용 ~~~
+1. CORS란?
+-> CORS는 Cross Origin Resource Sharing의 약자이고, 이는 추가 HTTP 헤더를 사용하여, 한 출처에서 실행 중인 웹 애플리케이션이 다른 출처의 선택한 자원에 접근할 수 있는 권한을 부여하도록 브라우저에 알려주는 체제이다. 즉 웹 페이지 상의 제한된 리소스를 최초 자원이 서비스된 도메인 밖의 다른 도메인으로부터 요청할 수 있게 허용하는 구조이다. 웹 애플리케이션은 리소스가 자신의 출처와 다를 때 교차 출처 HTTP 요청을 실행한다. 
+
+* 출처란?
+출처(Origin)이란 URL 구조에서의 https://(프로토콜), aneomagig.github.io(호스트), :443 혹은 :80 등 (포트)를 합친 것을 말한다. 즉 프로토콜, 호스트, 포트가 동일하면 '같은 출처'라고 한다.
+
+2. CSP(Content Security Policy란?)
+-> CSP는 웹 보안 정책 중 하나다. XSS나 Data Injection, Click Jacking 등 웹 페이지에 악성 스크립트를 삽입하는 공격기법을 막기 위해 사용된다. 주로 헤더에 특정 내용(예: Content-Security-Policy:* ; * 부분에는 다양한 주소들 / 설정들이 가능하다.)이 삽입되며, 특정 리소스가 어디서 왔는지를 검사하고 허용된 범위에 포함됐는지 검토한다. 그리고 CSP는 헤더에 어디서 정보들을 갖고 올 것인지 명시를 해 준다.
+
+
+3. webhacking.kr 21번 풀기
+-> 일단 처음에는 저번에 했던 문제처럼 admin과 'or'1=1'을 넣어보았다. 그랬더니 wrong password라는 결과가 나왔고... 그래서 admin과 거짓 값을 넣어보기 위해 'or'1=9'를 넣었더니 login fail이라고 나왔다. 이 다음에는 비밀번호가 몇자리인지 알아내야 할 것 같은데 뭐 방법이 없어서 그냥 admin' and length(pw)=1 or '1'= 0 에서 length(pw)에 1부터 쭉 넣어봤다.. 그랬더니 계속 wrong password가 뜨다가 36일때 login fail이 떴다. 사실 이 다음부터는 어떻게 해야 할지 모르겠어서 인터넷을 참고했다.,.. https://h232ch.tistory.com/24 을 참고해 파이썬 코드를 작성해서 there_is_no_rest_for_the_white_angel이라는 pw값을 얻어냈다.
