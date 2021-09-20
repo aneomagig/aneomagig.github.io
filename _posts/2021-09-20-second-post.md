@@ -2,13 +2,9 @@
 title:  "WhoIs 웹해킹 2주차 과제"
 
 categories:
-  - Blog
+  - WhoIs
 
-toc: true
-toc_sticky: true
- 
 date: 2021-09-20
-last_modified_at: 2021-09-20
 ---
 
 1. CORS란?
