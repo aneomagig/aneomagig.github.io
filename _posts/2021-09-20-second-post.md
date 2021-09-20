@@ -1,8 +1,7 @@
 ---
 title:  "WhoIs 웹해킹 2주차 과제"
 
-categories:
-  - WhoIs
+categories: whois
 
 date: 2021-09-20
 ---
