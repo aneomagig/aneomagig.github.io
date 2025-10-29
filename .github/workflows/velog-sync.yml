@@ -1,0 +1,33 @@
+name: 🪄 Velog → Jekyll Auto Sync
+
+on:
+    schedule:
+        - cron: "0 9 * * *" # 매일 오전 9시 (한국 시간은 UTC+9 → cron은 UTC 기준)
+    workflow_dispatch: # 수동 실행도 가능
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 📦 Checkout repository
+              uses: actions/checkout@v4
+
+            - name: 🐍 Set up Python
+              uses: actions/setup-python@v5
+              with:
+                  python-version: "3.12"
+
+            - name: ⚙️ Install dependencies
+              run: pip install feedparser requests beautifulsoup4
+
+            - name: 🔄 Run Velog sync script
+              run: python velog_to_jekyll_images_fixed.py
+
+            - name: 🧾 Commit & Push changes
+              run: |
+                  git config user.name "Velog Sync Bot"
+                  git config user.email "actions@github.com"
+                  git add .
+                  git diff --quiet && git diff --staged --quiet || git commit -m "🪄 Auto-sync Velog posts"
+                  git push
