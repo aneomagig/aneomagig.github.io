@@ -33,7 +33,7 @@ from datetime import datetime
 
 USERNAME = "hosooinmymind"
 RSS_URL = f"https://v2.velog.io/rss/@{USERNAME}"
-POSTS_DIR = "\_posts"
+POSTS_DIR = "_posts"
 IMG_DIR = f"assets/images/{USERNAME}"
 HEADERS = {"User-Agent": "Mozilla/5.0", "Referer": "https://velog.io/"}
 
@@ -43,11 +43,11 @@ os.makedirs(IMG_DIR, exist_ok=True)
 feed = feedparser.parse(RSS_URL)
 
 for entry in feed.entries:
-title = entry.title.strip()
-slug = re.sub(r'[^a-zA-Z0-9가-힣]+', '-', title).strip('-')
-date_parsed = datetime(\*entry.published_parsed[:6])
-date_filename = date_parsed.strftime("%Y-%m-%d")
-date_str = date_parsed.strftime("%Y-%m-%d %H:%M:%S +0900")
+    title = entry.title.strip()
+    slug = re.sub(r'[^a-zA-Z0-9가-힣]+', '-', title).strip('-')
+    date_parsed = datetime(*entry.published_parsed[:6])
+    date_filename = date_parsed.strftime("%Y-%m-%d")
+    date_str = date_parsed.strftime("%Y-%m-%d %H:%M:%S +0900")
 
     filename = f"{POSTS_DIR}/{date_filename}-{slug}.md"
     soup = BeautifulSoup(entry.description, "html.parser")
@@ -69,19 +69,15 @@ date_str = date_parsed.strftime("%Y-%m-%d %H:%M:%S +0900")
         img["src"] = f"/{local_path.replace(os.sep, '/')}"
 
     markdown = f"""---
-
 layout: post
 title: "{title}"
 date: {date_str}
 categories: velog
-
 ---
-
 {str(soup)}
 """
-with open(filename, "w", encoding="utf-8") as f:
-f.write(markdown)</code></pre><p>이 스크립트는</p>
-
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(markdown)</code></pre><p>이 스크립트는</p>
 <ul>
 <li>RSS에서 포스트 내용을 파싱</li>
 <li>Velog 이미지(velcdn.com)를 로컬로 다운로드</li>
@@ -95,12 +91,13 @@ f.write(markdown)</code></pre><p>이 스크립트는</p>
 <pre><code>name: 🪄 Velog → Jekyll Auto Sync
 
 on:
-schedule: - cron: '0 9 \* \* \*' # 매일 한국시간 오후 6시 실행
-workflow_dispatch: # 수동 실행도 가능
+  schedule:
+    - cron: '0 9 * * *'   # 매일 한국시간 오후 6시 실행
+  workflow_dispatch:       # 수동 실행도 가능
 
 jobs:
-sync:
-runs-on: ubuntu-latest
+  sync:
+    runs-on: ubuntu-latest
 
     steps:
       - name: 📦 Checkout repository
@@ -124,9 +121,7 @@ runs-on: ubuntu-latest
           git add .
           git diff --quiet &amp;&amp; git diff --staged --quiet || git commit -m "🪄 Auto-sync Velog posts"
           git push
-
 </code></pre><p>이제 매일 지정된 시간마다</p>
-
 <ul>
 <li>RSS → 포스트 변환</li>
 <li>자동 커밋 &amp; push</li>
@@ -161,11 +156,9 @@ runs-on: ubuntu-latest
 
     # HTML 경로 수정
     img["src"] = f"/{local_path.replace(os.sep, '/')}"</code></pre><p>이 코드는 다음을 수행한다:
-
-① RSS의 <img/> 태그에서 원본 src 추출 <a href="https://velog.velcdn.com/">https://velog.velcdn.com/</a>...
-② 이미지 파일을 assets/images/USERNAME/ 아래에 저장 로컬 정적 파일로 변환
-③ HTML 내 src 경로를 /assets/... 로 교체 Jekyll에서 로드 가능하게 변경</p>
-
+① RSS의 <img/> 태그에서 원본 src 추출    <a href="https://velog.velcdn.com/">https://velog.velcdn.com/</a>...
+② 이미지 파일을 assets/images/USERNAME/ 아래에 저장    로컬 정적 파일로 변환
+③ HTML 내 src 경로를 /assets/... 로 교체    Jekyll에서 로드 가능하게 변경</p>
 <p>결과적으로 GitHub Pages에서도 모든 이미지가 깨지지 않고 표시되었다.
 특히 requests.get()에 User-Agent 헤더를 추가한 것이 중요했다.
 Velog의 CDN이 기본 요청(헤더 없는 요청)을 차단하기 때문이다.</p>
@@ -195,13 +188,13 @@ Velog와 GitHub Pages를 함께 운영하니 개발 기록과 개인 블로그�
 <h3 id="2️⃣-velog-rss-크롤링-스크립트">2️⃣ Velog RSS 크롤링 스크립트</h3>
 <p>RSS 주소 예시 👉 <a href="https://v2.velog.io/rss/hosooinmymind">https://v2.velog.io/rss/hosooinmymind</a>
 이 피드를 읽어와 Jekyll용 마크다운 포스트로 변환한다.</p>
-<pre><code>velog_to_jekyll_images.py
+<pre><code>velog_to_jekyl_images.py
 import feedparser, os, re, requests
 from datetime import datetime
 from bs4 import BeautifulSoup
 
 VELG_FEED_URL = "https://v2.velog.io/rss/hosooinmymind"
-SAVE_DIR = "\_posts"
+SAVE_DIR = "_posts"
 IMAGE_DIR = "assets/images/hosooinmymind"
 
 os.makedirs(SAVE_DIR, exist_ok=True)
@@ -209,9 +202,9 @@ os.makedirs(IMAGE_DIR, exist_ok=True)
 
 feed = feedparser.parse(VELG_FEED_URL)
 for entry in feed.entries:
-title = re.sub(r'[\\/*?:"&lt;&gt;|]', '', entry.title.strip())
-date = datetime(\*entry.published_parsed[:6])
-filename = f"{SAVE_DIR}/{date.strftime('%Y-%m-%d')}-{title.replace(' ', '-')}.md"
+    title = re.sub(r'[\\/*?:"&lt;&gt;|]', '', entry.title.strip())
+    date = datetime(*entry.published_parsed[:6])
+    filename = f"{SAVE_DIR}/{date.strftime('%Y-%m-%d')}-{title.replace(' ', '-')}.md"
 
     soup = BeautifulSoup(entry.description, "html.parser")
     for img in soup.find_all("img"):
@@ -225,35 +218,34 @@ filename = f"{SAVE_DIR}/{date.strftime('%Y-%m-%d')}-{title.replace(' ', '-')}.md
             img["src"] = f"/{save_path}"
 
     post = f"""---
-
 layout: post
 title: "{entry.title}"
 date: {date.strftime('%Y-%m-%d %H:%M:%S')} +0900
 categories: velog
-
 ---
 
 {soup}
 """
-with open(filename, "w", encoding="utf-8") as f:
-f.write(post)</code></pre><h3 id="3️⃣-github-actions-자동-실행-세팅">3️⃣ GitHub Actions 자동 실행 세팅</h3>
-
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(post)</code></pre><h3 id="3️⃣-github-actions-자동-실행-세팅">3️⃣ GitHub Actions 자동 실행 세팅</h3>
 <p>.github/workflows/velog-sync.yml
 자동으로 위 스크립트를 실행하는 워크플로 파일이다.</p>
 <pre><code>name: Sync Velog posts
 
 permissions:
-contents: write # ✅ 저장소에 푸시할 권한 부여
+  contents: write  # ✅ 저장소에 푸시할 권한 부여
 
 on:
-workflow_dispatch:
-schedule: - cron: "0 15 \* \* \*" # 매일 00시 KST 실행
+  workflow_dispatch:
+  schedule:
+    - cron: "0 15 * * *"  # 매일 00시 KST 실행
 
 jobs:
-sync:
-runs-on: ubuntu-latest
-steps: - name: 📦 Checkout repository
-uses: actions/checkout@v3
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v3
 
       - name: 🐍 Set up Python
         uses: actions/setup-python@v4
@@ -265,7 +257,7 @@ uses: actions/checkout@v3
           pip install feedparser requests beautifulsoup4
 
       - name: 🔄 Run Velog sync script
-        run: python velog_to_jekyll_images.py
+        run: python velog_to_jekyl_images.py
 
       - name: 🪄 Commit &amp; Push changes
         run: |
@@ -281,7 +273,6 @@ uses: actions/checkout@v3
           curl -H "Content-Type: application/json" \
             -d '{"content": "✅ Velog 동기화 완료! 새로운 포스트가 블로그에 반영되었습니다."}' \
             ${{ secrets.DISCORD_WEBHOOK_URL }}</code></pre><h3 id="5️⃣-discord-webhook-설정">5️⃣ Discord Webhook 설정</h3>
-
 <p>디스코드 서버에서 → 서버 설정 → 통합 → Webhook → 새 웹훅 만들기
 복사한 URL을 GitHub Secrets에 추가
 🔹 GitHub → Settings → Secrets → Actions → New repository secret</p>
