@@ -22,7 +22,7 @@ jobs:
               run: pip install feedparser requests beautifulsoup4
 
             - name: 🔄 Run Velog sync script
-              run: python velog_to_jekyll_images_fixed.py
+              run: python velog_to_jekyll_images.py
 
             - name: 🧾 Commit & Push changes
               run: |
