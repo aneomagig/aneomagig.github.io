@@ -24,7 +24,7 @@ jobs:
               run: sleep 180 # RSS 갱신 대기 (3분)
 
             - name: Run Velog sync script
-              run: python velog_to_jekyl_images.py
+              run: python velog_to_jekyll_images.py
 
             - name: Commit & Push changes
               run: |
