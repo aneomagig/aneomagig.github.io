@@ -19,7 +19,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: mj's blog
+title: Mj's blog
 email: cleinblue@naver.com
 description: >- # this means to ignore newlines until "baseurl:"
     Write an awesome description for your new site here. You can edit this
@@ -30,12 +30,16 @@ url: "https://github.com/aneomagig" # the base hostname & protocol for your site
 github_username: aneomagig
 
 # Build settings
-theme: minima
+theme: null
 plugins:
     - jekyll-feed
     - jekyll-seo-tag
 
 markdown: kramdown
+
+sass:
+    sass_dir: .
+    style: compressed
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

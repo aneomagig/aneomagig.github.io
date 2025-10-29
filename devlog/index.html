@@ -1,0 +1,27 @@
+---
+layout: default
+title: "Dev Log"
+---
+
+<section class="blog-list">
+    {% for post in site.posts %} {% assign first_img = post.content |
+    split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:''
+    | split:'"' | first %} {% if first_img == "" %} {% assign first_img =
+    '/assets/default-thumbnail.jpg' %} {% endif %}
+
+    <article class="blog-card">
+        <div class="thumb">
+            <img src="{{ first_img | relative_url }}" alt="thumbnail" />
+        </div>
+        <div class="info">
+            <h2>
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            <p class="excerpt">
+                {{ post.excerpt | strip_html | truncate: 120 }}
+            </p>
+            <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+        </div>
+    </article>
+    {% endfor %}
+</section>

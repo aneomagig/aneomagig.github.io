@@ -1,0 +1,295 @@
+---
+---
+
+body {
+    margin: 0;
+    font-family: "Noto Sans KR", sans-serif;
+    background: #fff;
+    color: #111;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ---------------- NAVBAR ---------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar .logo a {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar nav a {
+    margin: 0 15px;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.navbar nav a:hover {
+    opacity: 0.6;
+}
+
+/* ---------------- HOME ---------------- */
+.home-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.menu-item {
+    border: 1px solid #ddd;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.menu-item:hover {
+    border-color: #000;
+    transform: translateY(-5px);
+}
+
+.menu-img {
+    width: 100%;
+    height: 200px;
+    background: #f2f2f2;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.menu-item h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+/* ---------------- BLOG ---------------- */
+.blog-list {
+    width: 80%;
+    margin: 60px auto;
+}
+
+.blog-card {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 0;
+}
+
+.blog-date {
+    width: 90px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.blog-info h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.blog-info p {
+    margin-top: 8px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* ---------------- PORTFOLIO ---------------- */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    width: 90%;
+    margin: 50px auto;
+}
+
+.portfolio-item img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.caption {
+    text-align: center;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* ---------------- ABOUT ---------------- */
+.about-container {
+    display: flex;
+    width: 80%;
+    margin: 80px auto;
+    gap: 60px;
+}
+
+.profile-img {
+    width: 300px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.about-right h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.about-right p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.about-details p {
+    margin: 8px 0;
+    color: #333;
+}
+
+/* ---------------- FOOTER ---------------- */
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ---------- DEVLOG LIST ---------- */
+.blog-list {
+    width: 80%;
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.blog-card {
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    background: #fff;
+    transition: box-shadow 0.2s ease;
+}
+
+.blog-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.blog-card .thumb {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 8px;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.blog-card .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blog-card .info {
+    flex: 1;
+}
+
+.blog-card .info h2 {
+    font-size: 1.2rem;
+    margin: 0 0 8px;
+}
+
+.blog-card .info h2 a {
+    color: #111;
+    text-decoration: none;
+}
+
+.blog-card .info h2 a:hover {
+    color: #0070f3;
+}
+
+.blog-card .excerpt {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.blog-card .date {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* ---------- POST PAGE ---------- */
+.post {
+    width: 70%;
+    margin: 60px auto;
+    line-height: 1.7;
+    color: #222;
+}
+
+.post-header {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.post-title {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.post-date {
+    color: #999;
+    font-size: 0.9rem;
+}
+
+.post-content img {
+    max-width: 100%;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+}
+
+.post-content pre {
+    background: #f8f8f8;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.post-content code {
+    background: #f4f4f4;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.post-footer {
+    margin-top: 40px;
+    text-align: right;
+}
+
+.back-link {
+    text-decoration: none;
+    color: #0070f3;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
