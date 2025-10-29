@@ -1,5 +1,8 @@
 name: 🪄 Velog → Jekyll Auto Sync
 
+permissions:
+    contents: write
+
 on:
     schedule:
         - cron: "0 9 * * *" # 매일 오전 9시 (한국 시간은 UTC+9 → cron은 UTC 기준)
