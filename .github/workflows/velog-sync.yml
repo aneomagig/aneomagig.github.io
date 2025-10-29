@@ -1,46 +1,46 @@
-name: 🪄 Velog → Jekyll Auto Sync
-
-permissions:
-    contents: write
+name: "🎉 Velog → Jekyll Auto Sync"
 
 on:
+    workflow_dispatch:
     schedule:
-        - cron: "0 9 * * *" # 매일 오전 9시 (한국 시간은 UTC+9 → cron은 UTC 기준)
-    workflow_dispatch: # 수동 실행도 가능
+        - cron: "0 */6 * * *" # 6시간마다 자동 실행
 
 jobs:
     sync:
         runs-on: ubuntu-latest
-
         steps:
-            - name: 📦 Checkout repository
+            - name: Checkout repository
               uses: actions/checkout@v4
 
-            - name: 🐍 Set up Python
+            - name: Set up Python
               uses: actions/setup-python@v5
               with:
-                  python-version: "3.12"
+                  python-version: "3.11"
 
-            - name: ⚙️ Install dependencies
+            - name: Install dependencies
               run: pip install feedparser requests beautifulsoup4
 
-            - name: 🔄 Run Velog sync script
-              run: python velog_to_jekyll_images.py
+            - name: Wait for Velog RSS to update
+              run: sleep 180 # RSS 갱신 대기 (3분)
 
-            - name: 🧾 Commit & Push changes
+            - name: Run Velog sync script
+              run: python velog_to_jekyl_images.py
+
+            - name: Commit & Push changes
               run: |
                   git config user.name "Velog Sync Bot"
                   git config user.email "actions@github.com"
                   git add .
-                  git diff --quiet && git diff --staged --quiet || git commit -m "🪄 Auto-sync Velog posts"
+                  git commit -m "🪄 Auto-sync Velog posts" || echo "No changes"
                   git push
 
-            - name: 📢 디스코드 알림 보내기
-              if: always()
+            - name: Send Discord notification
+              if: success()
               env:
-                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+                  DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
               run: |
-                  LATEST_POST=$(ls -t _posts | head -n 1 | sed 's/.md//')
+                  LATEST_POST=$(ls -t _posts | head -n 1)
+                  MESSAGE="📰 새로운 포스트가 자동으로 업로드되었습니다!\n👉 $LATEST_POST"
                   curl -H "Content-Type: application/json" \
-                      -d "{\"content\": \"✅ **Velog 블로그 동기화 완료!**\\n📝 최신 글: **${LATEST_POST}**\\n🌐 <https://aneomagig.github.io>\"}" \
-                      $DISCORD_WEBHOOK
+                       -d "{\"content\": \"$MESSAGE\"}" \
+                       $DISCORD_WEBHOOK_URL

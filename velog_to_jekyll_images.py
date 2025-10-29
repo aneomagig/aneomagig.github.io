@@ -16,6 +16,8 @@ os.makedirs(POSTS_DIR, exist_ok=True)
 os.makedirs(IMG_DIR, exist_ok=True)
 
 feed = feedparser.parse(RSS_URL)
+entries = sorted(feed.entries, key=lambda e: datetime(*e.published_parsed[:6]), reverse=True)
+
 
 for entry in feed.entries:
     title = entry.title.strip()
