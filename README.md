@@ -1,2 +1,2 @@
 # aneomagig.github.io
-my ve-log
+my ve-log https://aneomagig.github.io/
