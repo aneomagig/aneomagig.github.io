@@ -31,3 +31,13 @@ jobs:
                   git add .
                   git diff --quiet && git diff --staged --quiet || git commit -m "🪄 Auto-sync Velog posts"
                   git push
+
+            - name: 📢 디스코드 알림 보내기
+              if: always()
+              env:
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+              run: |
+                  LATEST_POST=$(ls -t _posts | head -n 1 | sed 's/.md//')
+                  curl -H "Content-Type: application/json" \
+                      -d "{\"content\": \"✅ **Velog 블로그 동기화 완료!**\\n📝 최신 글: **${LATEST_POST}**\\n🌐 <https://aneomagig.github.io>\"}" \
+                      $DISCORD_WEBHOOK
