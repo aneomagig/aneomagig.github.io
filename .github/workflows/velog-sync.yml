@@ -21,7 +21,7 @@ jobs:
               run: pip install feedparser requests beautifulsoup4
 
             - name: Wait for Velog RSS to update
-              run: sleep 180 # RSS 갱신 대기 (3분)
+              run: sleep 30 # RSS 갱신 대기 (3분)
 
             - name: Run Velog sync script
               run: python velog_to_jekyll_images.py
