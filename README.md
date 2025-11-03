@@ -49,6 +49,7 @@ flowchart TD
 - _posts 업데이트 시 Jekyll로 자동 재빌드 및 배포
 
 ## 📂 디렉토리 구조
+```
 📁 repository-root
 ├── _posts/                    # Velog → 변환된 블로그 포스트 (Markdown)
 ├── assets/
@@ -59,6 +60,7 @@ flowchart TD
 └── .github/
     └── workflows/
         └── velog-sync.yml     # 자동화 워크플로우 설정
+```
 
 ## 🚀 자동화 워크플로우 (GitHub Actions)
 📄 .github/workflows/velog-sync.yml
