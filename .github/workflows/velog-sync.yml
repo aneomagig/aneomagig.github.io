@@ -27,15 +27,17 @@ jobs:
               run: python velog_to_jekyll_images.py
 
             - name: Commit & Push changes
+              id: commit
               run: |
                   git config user.name "Velog Sync Bot"
                   git config user.email "actions@github.com"
                   git add .
+                  git diff --cached --quiet && echo "no_changes=true" >> $GITHUB_OUTPUT || echo "no_changes=false" >> $GITHUB_OUTPUT
                   git commit -m "🪄 Auto-sync Velog posts" || echo "No changes"
                   git push
 
             - name: Send Discord notification
-              if: success()
+              if: success() && steps.commit.outputs.no_changes == 'false'
               env:
                   DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
               run: |

@@ -10,7 +10,7 @@
             rel="stylesheet"
         />
     </head>
-    <body>
+    <body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
         <header class="navbar">
             <h1 class="logo"><a href="{{ '/' | relative_url }}">M</a></h1>
             <nav>
