@@ -3,6 +3,7 @@ layout: post
 title: "[KT Cloud TechUp] 보안뉴스 크롤링 - requests 사용"
 date: 2025-10-23 03:03:48 +0900
 categories: velog
+series: "kt cloud techup"
 ---
 
 <p>지금까지는 selenium을 사용해서 크롤링을 진행했는데, 셀레니움보다 좀 더 빠른 방식인 requests를 사용하는 크롤링 실습을 진행한다.</p>

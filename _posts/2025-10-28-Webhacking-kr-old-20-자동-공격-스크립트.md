@@ -3,6 +3,7 @@ layout: post
 title: "[Webhacking.kr] old-20 자동 공격 스크립트"
 date: 2025-10-28 01:22:31 +0900
 categories: velog
+series: "wargame"
 ---
 
 <p>문제 자체는 굉장히 단순하다.

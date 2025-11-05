@@ -3,24 +3,43 @@ layout: default
 title: "Dev Log"
 ---
 
-<section class="blog-list">
+<section class="space-y-8">
+    {% assign grouped = site.posts | group_by: "series" %}
+
     {% for post in site.posts %} {% assign first_img = post.content |
     split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:''
     | split:'"' | first %} {% if first_img == "" %} {% assign first_img =
     '/assets/default-thumbnail.jpg' %} {% endif %}
 
-    <article class="blog-card">
-        <div class="thumb">
-            <img src="{{ first_img | relative_url }}" alt="thumbnail" />
+    <article
+        class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg md:flex-row md:items-center"
+    >
+        <div class="w-full overflow-hidden rounded-xl md:w-48">
+            <img
+                src="{{ first_img | relative_url }}"
+                alt="thumbnail"
+                class="h-40 w-full object-cover transition duration-200 group-hover:scale-105"
+            />
         </div>
-        <div class="info">
-            <h2>
-                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        <div class="flex-1 space-y-3">
+            <h2 class="font-display text-2xl font-semibold leading-tight">
+                <a
+                    href="{{ post.url | relative_url }}"
+                    class="transition hover:text-slate-600"
+                    >{{ post.title }}</a
+                >
             </h2>
-            <p class="excerpt">
+            <p class="text-sm text-slate-600">
                 {{ post.excerpt | strip_html | truncate: 120 }}
             </p>
-            <span class="date">{{ post.date | date: "%Y-%m-%d" }}</span>
+            <div class="flex items-center gap-3 text-xs text-slate-500">
+                <span>{{ post.date | date: "%Y-%m-%d" }}</span>
+                {% if post.series %}
+                <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-600">
+                    #{{ post.series }}
+                </span>
+                {% endif %}
+            </div>
         </div>
     </article>
     {% endfor %}

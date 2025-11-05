@@ -3,6 +3,7 @@ layout: post
 title: "[s2n] PyPI 배포용 Python 패키지 + Jenkins 기반 CI/CD 구조 이해하기"
 date: 2025-10-31 07:31:04 +0900
 categories: velog
+series: "s2n"
 ---
 
 <h3 id="1-용어-정리">1. 용어 정리</h3>

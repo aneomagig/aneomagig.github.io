@@ -2,17 +2,24 @@
 layout: default
 ---
 
-<article class="post">
-    <header class="post-header">
-        <h1 class="post-title">{{ page.title }}</h1>
-        <p class="post-date">{{ page.date | date: "%B %d, %Y" }}</p>
+<article class="mx-auto flex max-w-3xl flex-col gap-10">
+    <header class="space-y-2 border-b border-slate-200 pb-6 text-center md:text-left">
+        <h1 class="font-display text-4xl font-semibold tracking-tight text-slate-900">
+            {{ page.title }}
+        </h1>
+        <p class="text-sm uppercase tracking-wide text-slate-500">
+            {{ page.date | date: "%B %d, %Y" }}
+        </p>
     </header>
 
-    <div class="post-content">{{ content }}</div>
+    <div class="prose prose-slate max-w-none">{{ content }}</div>
 
-    <footer class="post-footer">
-        <a href="{{ '/devlog' | relative_url }}" class="back-link"
-            >← Back to Dev Log</a
+    <footer class="border-t border-slate-200 pt-6">
+        <a
+            href="{{ '/devlog' | relative_url }}"
+            class="inline-flex items-center gap-2 text-sm font-medium text-slate-600 transition hover:text-slate-900"
         >
+            <span aria-hidden="true">←</span> Dev Log으로 돌아가기
+        </a>
     </footer>
 </article>

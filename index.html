@@ -1,27 +1,57 @@
 ---
 layout: default
 title: "Home"
-body_class: home
+body_class: "bg-cover bg-center bg-fixed bg-no-repeat"
+body_background: "/assets/images/home/background.png"
 ---
 
-<section class="home-menu">
-    <div class="menu-grid">
-        <a href="{{ '/devlog' | relative_url }}" class="menu-item">
-            <div class="menu-img"></div>
-            <h2>Dev&nbsp;Log</h2>
-            <p>기술 학습과 개발 기록</p>
+<section
+    class="rounded-3xl border border-white/60 bg-white/70 p-12 shadow-xl backdrop-blur-xl transition"
+>
+    <div class="grid gap-10 md:grid-cols-3">
+        <a
+            href="{{ '/devlog' | relative_url }}"
+            class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/80 p-8 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
+        >
+            <div
+                class="h-40 w-full rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 transition group-hover:from-slate-300 group-hover:to-slate-100"
+            ></div>
+            <div class="space-y-3">
+                <h2 class="font-display text-2xl font-semibold tracking-tight">
+                    Dev&nbsp;Log
+                </h2>
+                <p class="text-sm text-slate-600">기술 학습과 개발 기록</p>
+            </div>
         </a>
 
-        <a href="{{ '/portfolio' | relative_url }}" class="menu-item">
-            <div class="menu-img"></div>
-            <h2>Portfolio</h2>
-            <p>디자인과 프로젝트 모음</p>
+        <a
+            href="{{ '/portfolio' | relative_url }}"
+            class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/80 p-8 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
+        >
+            <div
+                class="h-40 w-full rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 transition group-hover:from-slate-300 group-hover:to-slate-100"
+            ></div>
+            <div class="space-y-3">
+                <h2 class="font-display text-2xl font-semibold tracking-tight">
+                    Portfolio
+                </h2>
+                <p class="text-sm text-slate-600">프로젝트 모음</p>
+            </div>
         </a>
 
-        <a href="{{ '/about' | relative_url }}" class="menu-item">
-            <div class="menu-img"></div>
-            <h2>About&nbsp;Me</h2>
-            <p>나를 소개합니다</p>
+        <a
+            href="{{ '/about' | relative_url }}"
+            class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/80 p-8 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
+        >
+            <div
+                class="h-40 w-full rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 transition group-hover:from-slate-300 group-hover:to-slate-100"
+            ></div>
+            <div class="space-y-3">
+                <h2 class="font-display text-2xl font-semibold tracking-tight">
+                    About&nbsp;Me
+                </h2>
+                <p class="text-sm text-slate-600">저를 소개합니다</p>
+            </div>
         </a>
     </div>
 </section>

@@ -3,7 +3,7 @@ name: "🎉 Velog → Jekyll Auto Sync"
 on:
     workflow_dispatch:
     schedule:
-        - cron: "0 */6 * * *" # 6시간마다 자동 실행
+        - cron: '0 9 * * *' # 매일 18시(KST) 자동 실행
 
 jobs:
     sync:
@@ -26,23 +26,6 @@ jobs:
             - name: Run Velog sync script
               run: python velog_to_jekyll_images.py
 
-            - name: Commit & Push changes
-              id: commit
-              run: |
-                  git config user.name "Velog Sync Bot"
-                  git config user.email "actions@github.com"
-                  git add .
-                  git diff --cached --quiet && echo "no_changes=true" >> $GITHUB_OUTPUT || echo "no_changes=false" >> $GITHUB_OUTPUT
-                  git commit -m "🪄 Auto-sync Velog posts" || echo "No changes"
-                  git push
-
-            - name: Send Discord notification
-              if: success() && steps.commit.outputs.no_changes == 'false'
-              env:
-                  DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-              run: |
-                  LATEST_POST=$(ls -t _posts | head -n 1)
-                  MESSAGE="📰 새로운 포스트가 자동으로 업로드되었습니다!\n👉 $LATEST_POST"
-                  curl -H "Content-Type: application/json" \
-                       -d "{\"content\": \"$MESSAGE\"}" \
-                       $DISCORD_WEBHOOK_URL
+            - name: Capture latest post details
+              id: latest
+              run: python3 capture_latest_post.py

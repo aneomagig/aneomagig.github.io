@@ -3,6 +3,7 @@ layout: post
 title: "[s2n] Python Package 생성 및 배포 공부"
 date: 2025-10-31 08:53:15 +0900
 categories: velog
+series: "s2n"
 ---
 
 <p>Python을 이용하면서 pip install 명령어를 통해서 패키지를 등록하는 게 국룰.

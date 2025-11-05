@@ -3,6 +3,7 @@ layout: post
 title: "[KT Cloud TechUp] heartbleed 실습"
 date: 2025-10-15 07:21:08 +0900
 categories: velog
+series: "kt cloud techup"
 ---
 
 <h2 id="heartbleed">Heartbleed</h2>

@@ -3,6 +3,7 @@ layout: post
 title: "[KT Cloud TechUp] xampp mysql 실습 (작성중)"
 date: 2025-10-16 08:14:23 +0900
 categories: velog
+series: "kt cloud techup"
 ---
 
 <p>xampp를 다운로드하고 설정하면 이런 컨트롤 패널이 뜬다. </p>

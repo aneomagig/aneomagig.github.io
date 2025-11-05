@@ -3,6 +3,7 @@ layout: post
 title: "[Webhacking.kr] old-12 Javascript challenge"
 date: 2025-10-28 03:23:07 +0900
 categories: velog
+series: "wargame"
 ---
 
 <p><img alt="" src="/assets/images/hosooinmymind/images/hosooinmymind/post/ce23b44b-78cf-49e9-bca8-9f4e2044e5de/image.png"/>

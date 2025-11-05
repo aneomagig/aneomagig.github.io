@@ -4,24 +4,89 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ page.title }} | {{ site.title }}</title>
-        <link rel="stylesheet" href="{{ '/style.css' | relative_url }}" />
+        <link
+            rel="stylesheet"
+            href="{{ '/assets/css/tailwind.output.css' | relative_url }}"
+        />
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap"
             rel="stylesheet"
         />
     </head>
-    <body{% if page.body_class %} class="{{ page.body_class }}"{% endif %}>
-        <header class="navbar">
-            <h1 class="logo"><a href="{{ '/' | relative_url }}">M</a></h1>
-            <nav>
-                <a href="{{ '/devlog' | relative_url }}">Dev Log</a>
-                <a href="{{ '/portfolio' | relative_url }}">Portfolio</a>
-                <a href="{{ '/about' | relative_url }}">About</a>
-            </nav>
+    <body
+        class="min-h-screen bg-white/95 text-slate-900 antialiased {% if page.body_class %}{{ page.body_class }}{% endif %}"
+        {% if page.body_background %}
+        style="background-image: url('{{ page.body_background | relative_url }}');"
+        {% endif %}
+    >
+        <header class="mx-auto mt-12 max-w-5xl px-6">
+            <div
+                class="flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm backdrop-blur-lg md:flex-row md:items-center md:justify-between"
+            >
+                <h1 class="font-display text-3xl font-semibold tracking-tight">
+                    <a
+                        href="{{ '/' | relative_url }}"
+                        class="text-slate-900 transition hover:text-slate-600"
+                        >💭 Minji's Archive</a
+                    >
+                </h1>
+                <nav class="flex flex-wrap gap-3 text-sm font-medium text-slate-600">
+                    {% assign nav_base_class = 'rounded-full border border-transparent px-4 py-2 transition hover:border-slate-300 hover:bg-slate-100/80' %}
+                    {% assign nav_active_class = 'border-slate-300  text-slate-900' %}
+                    {% capture nav_active_attrs %} aria-current="page" style="--tw-bg-opacity: 0.8;"{% endcapture %}
+                    {% assign normalized_home_url = site.baseurl | append: '/' %}
+                    {% assign current_section = '' %}
+                    {% if page.url == '/' or page.url == '/index.html' or page.url == site.baseurl or page.url == normalized_home_url %}
+                        {% assign current_section = 'home' %}
+                    {% elsif page.layout == 'post' or page.url contains '/devlog' %}
+                        {% assign current_section = 'devlog' %}
+                    {% elsif page.url contains '/portfolio' %}
+                        {% assign current_section = 'portfolio' %}
+                    {% elsif page.url contains '/about' %}
+                        {% assign current_section = 'about' %}
+                    {% endif %}
+                    {% assign is_home = current_section == 'home' %}
+                    <a
+                        href="{{ '/' | relative_url }}"
+                        class="{{ nav_base_class }}{% if is_home %} {{ nav_active_class }}{% endif %}"
+                        {% if is_home %}{{ nav_active_attrs }}{% endif %}
+                    >
+                        Home
+                    </a>
+                    {% assign is_devlog = current_section == 'devlog' %}
+                    <a
+                        href="{{ '/devlog' | relative_url }}"
+                        class="{{ nav_base_class }}{% if is_devlog %} {{ nav_active_class }}{% endif %}"
+                        {% if is_devlog %}{{ nav_active_attrs }}{% endif %}
+                    >
+                        Dev Log
+                    </a>
+                    {% assign is_portfolio = current_section == 'portfolio' %}
+                    <a
+                        href="{{ '/portfolio' | relative_url }}"
+                        class="{{ nav_base_class }}{% if is_portfolio %} {{ nav_active_class }}{% endif %}"
+                        {% if is_portfolio %}{{ nav_active_attrs }}{% endif %}
+                    >
+                        Portfolio
+                    </a>
+                    {% assign is_about = current_section == 'about' %}
+                    <a
+                        href="{{ '/about' | relative_url }}"
+                        class="{{ nav_base_class }}{% if is_about %} {{ nav_active_class }}{% endif %}"
+                        {% if is_about %}{{ nav_active_attrs }}{% endif %}
+                    >
+                        About
+                    </a>
+                </nav>
+            </div>
         </header>
 
-        <main class="content">{{ content }}</main>
+        <main class="mx-auto mt-10 max-w-5xl px-6 pb-16">
+            {{ content }}
+        </main>
 
-        <footer class="footer">© {{ site.time | date: '%Y' }} Minji</footer>
+        <footer class="mx-auto max-w-5xl px-6 pb-12 text-sm text-slate-500">
+            © {{ site.time | date: '%Y' }} Minji
+        </footer>
     </body>
 </html>

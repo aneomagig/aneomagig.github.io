@@ -3,17 +3,45 @@ layout: portfolio
 title: "Portfolio"
 ---
 
-<section class="portfolio-grid">
-    <div class="portfolio-item">
-        <img src="/assets/images/work1.jpg" alt="Work 1" />
-        <div class="caption">Center Festival Design</div>
-    </div>
-    <div class="portfolio-item">
-        <img src="/assets/images/work2.jpg" alt="Work 2" />
-        <div class="caption">Retro Kitano Poster</div>
-    </div>
-    <div class="portfolio-item">
-        <img src="/assets/images/work3.jpg" alt="Work 3" />
-        <div class="caption">Milos Forman Exhibition</div>
+<section
+    class="rounded-3xl border border-slate-200 bg-white/90 p-10 shadow-sm backdrop-blur"
+>
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div
+            class="group overflow-hidden rounded-2xl border border-slate-200 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
+        >
+            <img
+                src="/assets/images/work1.jpg"
+                alt="Work 1"
+                class="h-56 w-full object-cover transition duration-200 group-hover:scale-105"
+            />
+            <div class="px-6 py-4 text-center text-sm font-medium text-slate-600">
+                Center Festival Design
+            </div>
+        </div>
+        <div
+            class="group overflow-hidden rounded-2xl border border-slate-200 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
+        >
+            <img
+                src="/assets/images/work2.jpg"
+                alt="Work 2"
+                class="h-56 w-full object-cover transition duration-200 group-hover:scale-105"
+            />
+            <div class="px-6 py-4 text-center text-sm font-medium text-slate-600">
+                Retro Kitano Poster
+            </div>
+        </div>
+        <div
+            class="group overflow-hidden rounded-2xl border border-slate-200 bg-white/90 shadow-sm transition hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
+        >
+            <img
+                src="/assets/images/work3.jpg"
+                alt="Work 3"
+                class="h-56 w-full object-cover transition duration-200 group-hover:scale-105"
+            />
+            <div class="px-6 py-4 text-center text-sm font-medium text-slate-600">
+                Milos Forman Exhibition
+            </div>
+        </div>
     </div>
 </section>

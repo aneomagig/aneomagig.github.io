@@ -3,6 +3,7 @@ layout: post
 title: "[KT Cloud TechUp] NESSUS, Web Shell, Reverse Telnet, OWASP ZAP"
 date: 2025-10-15 02:50:39 +0900
 categories: velog
+series: "kt cloud techup"
 ---
 
 <h2 id="nesus">NESUS</h2>

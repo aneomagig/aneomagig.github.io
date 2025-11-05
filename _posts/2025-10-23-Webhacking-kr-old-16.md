@@ -3,6 +3,7 @@ layout: post
 title: "[Webhacking.kr] old-16"
 date: 2025-10-23 05:36:05 +0900
 categories: velog
+series: "wargame"
 ---
 
 <p><img alt="" src="/assets/images/hosooinmymind/images/hosooinmymind/post/2b4baba4-d7a5-4211-87f3-ac51e10d8b2c/image.png"/>

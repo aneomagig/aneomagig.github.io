@@ -3,6 +3,7 @@ layout: post
 title: "[KT Cloud TechUp] 크롤링 실습 (feat. 정규표현식)"
 date: 2025-10-17 08:55:35 +0900
 categories: velog
+series: "kt cloud techup"
 ---
 
 <h2 id="1-ip-주소-확인-사이트에서-현재-컴퓨터의-공인-ip-주소-자동으로-추출하기">1. IP 주소 확인 사이트에서 현재 컴퓨터의 공인 IP 주소 자동으로 추출하기</h2>

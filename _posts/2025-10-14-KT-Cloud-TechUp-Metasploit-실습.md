@@ -3,6 +3,7 @@ layout: post
 title: "[KT Cloud TechUp] Metasploit 실습 ⭐⭐"
 date: 2025-10-14 07:40:50 +0900
 categories: velog
+series: "kt cloud techup"
 ---
 
 <blockquote>

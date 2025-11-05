@@ -3,6 +3,7 @@ layout: post
 title: "[s2n] GitHub Actions로 CI/CD 파이프라인 구축하기 (feat. 젠킨스)"
 date: 2025-11-03 05:43:11 +0900
 categories: velog
+series: "s2n"
 ---
 
 <h2 id="chapter-1-시행착오">Chapter 1 (시행착오)</h2>

@@ -3,6 +3,7 @@ layout: post
 title: "[Webhacking.kr] old-10"
 date: 2025-10-21 02:41:09 +0900
 categories: velog
+series: "wargame"
 ---
 
 <p><img alt="" src="/assets/images/hosooinmymind/images/hosooinmymind/post/b06e62da-8543-44ff-ac4e-8e6b60d7a159/image.png"/>O를 goal에 넣으면 될 것 같은 느낌이 드는 문제이다.

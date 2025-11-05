@@ -3,6 +3,7 @@ layout: post
 title: "[Webhacking.kr] old-2"
 date: 2025-10-20 01:29:13 +0900
 categories: velog
+series: "wargame"
 ---
 
 <p>주말동안 <a href="https://webhacking.kr/challenge/web-02/%EB%A5%BC">https://webhacking.kr/challenge/web-02/를</a> 푸는 것이 과제였다.

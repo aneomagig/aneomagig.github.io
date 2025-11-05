@@ -3,6 +3,7 @@ layout: post
 title: "[KT Cloud TechUp] 파일 업로드 취약점 환경 구현 및 침투 실습"
 date: 2025-10-24 08:52:10 +0900
 categories: velog
+series: "kt cloud techup"
 ---
 
 <h2 id="part-1-python으로-웹서버에-파일-업로드하기">Part 1: Python으로 웹서버에 파일 업로드하기</h2>
