@@ -4,6 +4,7 @@ title: "[KT Cloud TechUp] expoid_db 데이터 시각화 대시보드 제작"
 date: 2025-10-22 01:28:15 +0900
 categories: velog
 series: "kt cloud techup"
+thumbnail: "/assets/images/hosooinmymind/images/hosooinmymind/post/143f08aa-731a-4411-95c9-03e1cd15147b/image.png"
 ---
 
 <p><img alt="" src="/assets/images/hosooinmymind/images/hosooinmymind/post/143f08aa-731a-4411-95c9-03e1cd15147b/image.png"/>우선은 phpmyadmin에서 테이블을 제작하고 간단한 테스트 데이터들을 넣어두었다.</p>

@@ -12,12 +12,18 @@
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Noto+Sans+KR:wght@400;500;700&display=swap"
             rel="stylesheet"
         />
+        <style>
+            .series-filter.active {
+                background-color: rgba(244, 114, 182, 0.9);
+                border-color: rgba(244, 114, 182, 0.9);
+                color: #fff;
+            }
+        </style>
     </head>
+    {% assign background_image = page.body_background | default: '/assets/images/home/background.png' %}
     <body
         class="min-h-screen bg-white/95 text-slate-900 antialiased {% if page.body_class %}{{ page.body_class }}{% endif %}"
-        {% if page.body_background %}
-        style="background-image: url('{{ page.body_background | relative_url }}');"
-        {% endif %}
+        style="background-image: url('{{ background_image | relative_url }}');"
     >
         <header class="mx-auto mt-12 max-w-5xl px-6">
             <div
@@ -45,35 +51,31 @@
                     {% elsif page.url contains '/about' %}
                         {% assign current_section = 'about' %}
                     {% endif %}
-                    {% assign is_home = current_section == 'home' %}
                     <a
                         href="{{ '/' | relative_url }}"
-                        class="{{ nav_base_class }}{% if is_home %} {{ nav_active_class }}{% endif %}"
-                        {% if is_home %}{{ nav_active_attrs }}{% endif %}
+                        class="{{ nav_base_class }}{% if current_section == 'home' %} {{ nav_active_class }}{% endif %}"
+                        {% if current_section == 'home' %}{{ nav_active_attrs }}{% endif %}
                     >
                         Home
                     </a>
-                    {% assign is_devlog = current_section == 'devlog' %}
                     <a
                         href="{{ '/devlog' | relative_url }}"
-                        class="{{ nav_base_class }}{% if is_devlog %} {{ nav_active_class }}{% endif %}"
-                        {% if is_devlog %}{{ nav_active_attrs }}{% endif %}
+                        class="{{ nav_base_class }}{% if current_section == 'devlog' %} {{ nav_active_class }}{% endif %}"
+                        {% if current_section == 'devlog' %}{{ nav_active_attrs }}{% endif %}
                     >
                         Dev Log
                     </a>
-                    {% assign is_portfolio = current_section == 'portfolio' %}
                     <a
                         href="{{ '/portfolio' | relative_url }}"
-                        class="{{ nav_base_class }}{% if is_portfolio %} {{ nav_active_class }}{% endif %}"
-                        {% if is_portfolio %}{{ nav_active_attrs }}{% endif %}
+                        class="{{ nav_base_class }}{% if current_section == 'portfolio' %} {{ nav_active_class }}{% endif %}"
+                        {% if current_section == 'portfolio' %}{{ nav_active_attrs }}{% endif %}
                     >
                         Portfolio
                     </a>
-                    {% assign is_about = current_section == 'about' %}
                     <a
                         href="{{ '/about' | relative_url }}"
-                        class="{{ nav_base_class }}{% if is_about %} {{ nav_active_class }}{% endif %}"
-                        {% if is_about %}{{ nav_active_attrs }}{% endif %}
+                        class="{{ nav_base_class }}{% if current_section == 'about' %} {{ nav_active_class }}{% endif %}"
+                        {% if current_section == 'about' %}{{ nav_active_attrs }}{% endif %}
                     >
                         About
                     </a>
@@ -88,5 +90,46 @@
         <footer class="mx-auto max-w-5xl px-6 pb-12 text-sm text-slate-500">
             © {{ site.time | date: '%Y' }} Minji
         </footer>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('[data-series-filter-group]').forEach(function (container) {
+                    var groupId = container.getAttribute('data-series-filter-group');
+                    var targetList = document.querySelector('[data-series-list="' + groupId + '"]');
+                    if (!targetList) {
+                        return;
+                    }
+                    var buttons = Array.prototype.slice.call(container.querySelectorAll('[data-series-filter]'));
+                    var cards = Array.prototype.slice.call(targetList.querySelectorAll('[data-series-card]'));
+
+                    function applyFilter(target) {
+                        buttons.forEach(function (btn) {
+                            btn.classList.toggle('active', btn.getAttribute('data-series-filter') === target);
+                            if (target === 'all') {
+                                btn.classList.toggle('active', btn.getAttribute('data-series-filter') === 'all');
+                            }
+                        });
+                        cards.forEach(function (card) {
+                            var series = card.getAttribute('data-series') || 'none';
+                            if (target === 'all' || target === series) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        });
+                    }
+
+                    buttons.forEach(function (btn) {
+                        btn.addEventListener('click', function () {
+                            var target = btn.getAttribute('data-series-filter');
+                            applyFilter(target);
+                        });
+                    });
+
+                    if (buttons.length > 0) {
+                        applyFilter('all');
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
