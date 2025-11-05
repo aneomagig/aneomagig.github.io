@@ -3,44 +3,139 @@ layout: default
 title: "Dev Log"
 ---
 
+{% assign dev_posts = site.posts | where: "categories", "velog" %}
+{% assign devlog_series_groups = dev_posts | group_by: "series" %}
+
 <section class="space-y-8">
-    {% assign grouped = site.posts | group_by: "series" %}
+    <header class="space-y-2">
+        <p class="text-sm font-semibold uppercase tracking-wide text-slate-400">
+            Latest Updates
+        </p>
+        <h1 class="font-display text-3xl font-semibold text-slate-900">
+            Dev Log
+        </h1>
+        <p class="max-w-2xl text-sm text-slate-600">
+            Velog에서 작성한 모든 포스트를 카드 형태로 모았습니다.
+        </p>
+    </header>
 
-    {% for post in site.posts %} {% assign first_img = post.content |
-    split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:''
-    | split:'"' | first %} {% if first_img == "" %} {% assign first_img =
-    '/assets/default-thumbnail.jpg' %} {% endif %}
-
-    <article
-        class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/90 p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg md:flex-row md:items-center"
-    >
-        <div class="w-full overflow-hidden rounded-xl md:w-48">
-            <img
-                src="{{ first_img | relative_url }}"
-                alt="thumbnail"
-                class="h-40 w-full object-cover transition duration-200 group-hover:scale-105"
-            />
-        </div>
-        <div class="flex-1 space-y-3">
-            <h2 class="font-display text-2xl font-semibold leading-tight">
-                <a
-                    href="{{ post.url | relative_url }}"
-                    class="transition hover:text-slate-600"
-                    >{{ post.title }}</a
+    <div class="space-y-4">
+        {% if devlog_series_groups.size > 1 %}
+            <div
+                class="flex flex-wrap gap-2 rounded-3xl p-3 text-xs font-medium text-rose-400"
+                data-series-filter-group="devlog-posts"
+            >
+                <button
+                    type="button"
+                    class="series-filter rounded-full border border-rose-200 bg-white px-3 py-1 text-slate-900 transition hover:bg-rose-500 hover:text-white"
+                    data-series-filter="all"
                 >
-            </h2>
-            <p class="text-sm text-slate-600">
-                {{ post.excerpt | strip_html | truncate: 120 }}
-            </p>
-            <div class="flex items-center gap-3 text-xs text-slate-500">
-                <span>{{ post.date | date: "%Y-%m-%d" }}</span>
-                {% if post.series %}
-                <span class="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 font-medium text-slate-600">
-                    #{{ post.series }}
-                </span>
+                    전체
+                </button>
+                {% assign devlog_has_empty_series = false %}
+                {% for group in devlog_series_groups %}
+                {% assign raw_series = group.name %}
+                {% if raw_series and raw_series != '' %}
+                    {% assign series_slug = raw_series | slugify %}
+                    <button
+                        type="button"
+                        class="series-filter rounded-full border border-rose-200 bg-white px-3 py-1 text-slate-900 transition hover:bg-rose-500 hover:text-white"
+                        data-series-filter="{{ series_slug }}"
+                        >
+                            {{ raw_series }}
+                        </button>
+                    {% else %}
+                        {% assign devlog_has_empty_series = true %}
+                    {% endif %}
+                {% endfor %}
+                {% if devlog_has_empty_series %}
+                    <button
+                        type="button"
+                        class="series-filter rounded-full border border-rose-200 bg-white px-3 py-1 text-slate-900 transition hover:bg-rose-500 hover:text-white"
+                        data-series-filter="none"
+                    >
+                        기타
+                    </button>
                 {% endif %}
             </div>
+        {% endif %}
+
+        <div class="space-y-5" data-series-list="devlog-posts">
+        {% for post in dev_posts %}
+            {% assign thumbnail = post.thumbnail %}
+            {% if thumbnail == nil or thumbnail == "" %}
+                {% assign first_img = post.content | split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:'' | split:'"' | first %}
+                {% if first_img == "" %}
+                    {% assign thumbnail = '/assets/default-thumbnail.jpg' %}
+                {% else %}
+                    {% assign thumbnail = first_img %}
+                {% endif %}
+            {% endif %}
+
+            {% assign card_series = post.series %}
+            {% if card_series and card_series != '' %}
+                {% assign card_series_slug = card_series | slugify %}
+            {% else %}
+                {% assign card_series_slug = 'none' %}
+            {% endif %}
+
+            <article
+                class="group flex gap-5 rounded-3xl border border-slate-200 bg-white/95 p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-rose-200/80 hover:shadow-lg"
+                data-series-card
+                data-series="{{ card_series_slug }}"
+            >
+                <div
+                    class="hidden h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-rose-100 bg-rose-50/40 shadow-sm sm:block"
+                >
+                    {% if thumbnail contains '://' %}
+                        <img
+                            src="{{ thumbnail }}"
+                            alt="{{ post.title }}"
+                            class="h-full w-full object-cover"
+                            loading="lazy"
+                        />
+                    {% else %}
+                        <img
+                            src="{{ thumbnail | relative_url }}"
+                            alt="{{ post.title }}"
+                            class="h-full w-full object-cover"
+                            loading="lazy"
+                        />
+                    {% endif %}
+                </div>
+
+                <div class="flex min-w-0 flex-1 flex-col gap-3">
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-wide text-rose-400">
+                        <span class="rounded-full bg-rose-50 px-3 py-1 text-rose-500">
+                            {{ post.categories | array_to_sentence_string }}
+                        </span>
+                        {% if post.series %}
+                            <span class="rounded-full bg-indigo-50 px-3 py-1 text-indigo-500">
+                                {{ post.series }}
+                            </span>
+                        {% endif %}
+                    </div>
+                    <h2 class="font-display text-xl font-semibold leading-tight text-slate-900 transition group-hover:text-rose-500">
+                        <a href="{{ post.url | relative_url }}">
+                            {{ post.title }}
+                        </a>
+                    </h2>
+                    <p class="text-sm leading-relaxed text-slate-600">
+                        {{ post.content | strip_html | truncate: 140 }}
+                    </p>
+                    <div class="flex items-center gap-3 text-xs text-slate-400">
+                        <time datetime="{{ post.date | date_to_xmlschema }}">
+                            {{ post.date | date: "%Y.%m.%d" }}
+                        </time>
+                        {% assign primary_tag = post.tags | first %}
+                        {% if primary_tag %}
+                            <span>•</span>
+                            <span>{{ primary_tag }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
         </div>
-    </article>
-    {% endfor %}
+    </div>
 </section>

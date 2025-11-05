@@ -3,55 +3,230 @@ layout: default
 title: "Home"
 body_class: "bg-cover bg-center bg-fixed bg-no-repeat"
 body_background: "/assets/images/home/background.png"
+profile:
+    name: "Minji Kim"
+    role: "아주대학교 사이버보안학과 21학번"
+    bio: >
+        저는 보안과 자동화, 클라우드 인프라를 연결하는 엔지니어를 목표로 성장하고 있습니다.
+        단순히 코드를 작성하는 것을 넘어, 안전하고 효율적인 시스템을 만드는 일을 좋아합니다.
+    avatar: "/assets/images/profile.jpg"
 ---
 
-<section
-    class="rounded-3xl border border-white/60 bg-white/70 p-12 shadow-xl backdrop-blur-xl transition"
->
-    <div class="grid gap-10 md:grid-cols-3">
-        <a
-            href="{{ '/devlog' | relative_url }}"
-            class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/80 p-8 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
-        >
-            <div
-                class="h-40 w-full rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 transition group-hover:from-slate-300 group-hover:to-slate-100"
-            ></div>
-            <div class="space-y-3">
-                <h2 class="font-display text-2xl font-semibold tracking-tight">
-                    Dev&nbsp;Log
-                </h2>
-                <p class="text-sm text-slate-600">기술 학습과 개발 기록</p>
-            </div>
-        </a>
+{% assign max_posts = 5 %}
+{% assign home_posts = site.posts | slice: 0, max_posts %}
+{% assign series_groups = home_posts | group_by: "series" %}
 
-        <a
-            href="{{ '/portfolio' | relative_url }}"
-            class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/80 p-8 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
-        >
-            <div
-                class="h-40 w-full rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 transition group-hover:from-slate-300 group-hover:to-slate-100"
-            ></div>
-            <div class="space-y-3">
-                <h2 class="font-display text-2xl font-semibold tracking-tight">
-                    Portfolio
-                </h2>
-                <p class="text-sm text-slate-600">프로젝트 모음</p>
-            </div>
-        </a>
+<section class="space-y-8">
+    <div class="flex flex-col gap-2">
 
-        <a
-            href="{{ '/about' | relative_url }}"
-            class="group flex flex-col gap-6 rounded-2xl border border-slate-200 bg-white/80 p-8 text-center shadow-sm transition duration-200 hover:-translate-y-1 hover:border-slate-400 hover:shadow-lg"
-        >
-            <div
-                class="h-40 w-full rounded-lg bg-gradient-to-br from-slate-200 via-slate-100 to-slate-200 transition group-hover:from-slate-300 group-hover:to-slate-100"
-            ></div>
-            <div class="space-y-3">
-                <h2 class="font-display text-2xl font-semibold tracking-tight">
-                    About&nbsp;Me
-                </h2>
-                <p class="text-sm text-slate-600">저를 소개합니다</p>
+        <h2 class="font-display text-3xl font-semibold text-slate-900">
+            New Posts
+        </h2>
+    </div>
+
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <div class="space-y-4">
+            {% if series_groups.size > 1 %}
+                <div
+                    class="flex flex-wrap gap-2 rounded-3xl border border-white/60 bg-white/70 p-3 text-xs font-medium text-rose-400 shadow-sm backdrop-blur"
+                    data-series-filter-group="home-posts"
+                >
+                    <button
+                        type="button"
+                    class="series-filter rounded-full border border-rose-200 bg-white px-3 py-1 text-slate-900 transition hover:bg-rose-500 hover:text-white"
+                    data-series-filter="all"
+                >
+                    전체
+                </button>
+                    {% assign has_empty_series = false %}
+                    {% for group in series_groups %}
+                    {% assign raw_series = group.name %}
+                    {% if raw_series and raw_series != '' %}
+                        {% assign series_slug = raw_series | slugify %}
+                        <button
+                            type="button"
+                            class="series-filter rounded-full border border-rose-200 bg-white px-3 py-1 text-slate-900 transition hover:bg-rose-500 hover:text-white"
+                            data-series-filter="{{ series_slug }}"
+                        >
+                            {{ raw_series }}
+                        </button>
+                        {% else %}
+                            {% assign has_empty_series = true %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if has_empty_series %}
+                        <button
+                            type="button"
+                        class="series-filter rounded-full border border-rose-200 bg-white px-3 py-1 text-slate-900 transition hover:bg-rose-500 hover:text-white"
+                        data-series-filter="none"
+                    >
+                        기타
+                        </button>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="space-y-5" data-series-list="home-posts">
+            {% for post in home_posts %}
+                {% assign thumbnail = post.thumbnail %}
+                {% if thumbnail == nil or thumbnail == "" %}
+                    {% assign first_img = post.content | split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:'' | split:'"' | first %}
+                    {% if first_img == "" %}
+                        {% assign thumbnail = '/assets/default-thumbnail.jpg' %}
+                    {% else %}
+                        {% assign thumbnail = first_img %}
+                    {% endif %}
+                {% endif %}
+
+                {% assign card_series = post.series %}
+                {% if card_series and card_series != '' %}
+                    {% assign card_series_slug = card_series | slugify %}
+                {% else %}
+                    {% assign card_series_slug = 'none' %}
+                {% endif %}
+
+                <article
+                    class="group flex gap-5 rounded-3xl border border-white/60 bg-white/85 p-5 shadow-sm backdrop-blur transition duration-200 hover:-translate-y-1 hover:border-rose-200/80 hover:shadow-lg"
+                    data-series-card
+                    data-series="{{ card_series_slug }}"
+                >
+                    <div
+                        class="hidden h-24 w-24 flex-shrink-0 overflow-hidden rounded-2xl border border-rose-100 bg-rose-50/40 shadow-sm sm:block"
+                    >
+                        {% if thumbnail contains '://' %}
+                            <img
+                                src="{{ thumbnail }}"
+                                alt="{{ post.title }}"
+                                class="h-full w-full object-cover"
+                                loading="lazy"
+                            />
+                        {% else %}
+                            <img
+                                src="{{ thumbnail | relative_url }}"
+                                alt="{{ post.title }}"
+                                class="h-full w-full object-cover"
+                                loading="lazy"
+                            />
+                        {% endif %}
+                    </div>
+
+                    <div class="flex min-w-0 flex-1 flex-col gap-3">
+                        <div class="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-wide text-rose-400">
+                            <span class="rounded-full bg-rose-50 px-3 py-1 text-rose-500">
+                                {{ post.categories | array_to_sentence_string }}
+                            </span>
+                            {% if post.series %}
+                                <span class="rounded-full bg-indigo-50 px-3 py-1 text-indigo-500">
+                                    {{ post.series }}
+                                </span>
+                            {% endif %}
+                        </div>
+                        <h3 class="font-display text-xl font-semibold leading-tight text-slate-900 transition group-hover:text-rose-500">
+                            <a href="{{ post.url | relative_url }}">
+                                {{ post.title }}
+                            </a>
+                        </h3>
+                        <p class="text-sm leading-relaxed text-slate-600">
+                            {{ post.content | strip_html | truncate: 140 }}
+                        </p>
+                        <div class="flex items-center gap-3 text-xs text-slate-400">
+                            <time datetime="{{ post.date | date_to_xmlschema }}">
+                                {{ post.date | date: "%Y.%m.%d" }}
+                            </time>
+                            {% assign primary_tag = post.tags | first %}
+                            {% if primary_tag %}
+                                <span>•</span>
+                                <span>{{ primary_tag }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
             </div>
-        </a>
+        </div>
+
+        <aside class="flex flex-col gap-6">
+            <div
+                class="space-y-4 rounded-3xl border border-white/60 bg-white/80 p-6 text-center shadow-sm backdrop-blur"
+            >
+                <img
+                    src="{{ page.profile.avatar | default: '/assets/images/profile.jpg' | relative_url }}"
+                    alt="{{ page.profile.name }}"
+                    class="mx-auto h-28 w-28 rounded-full border border-white/50 object-cover shadow-sm"
+                />
+                <div class="space-y-2">
+                    <h3 class="font-display text-xl font-semibold text-slate-900">
+                        {{ page.profile.name }}
+                    </h3>
+                    <p class="text-sm font-medium text-rose-400">
+                        {{ page.profile.role }}
+                    </p>
+                    <p class="text-sm leading-relaxed text-slate-600">
+                        {{ page.profile.bio }}
+                    </p>
+                </div>
+                <div class="flex justify-center gap-4 text-rose-300">
+                    <span title="Contact">✉️</span>
+                    <span title="Projects">🧰</span>
+                    <span title="Community">🤝</span>
+                </div>
+            </div>
+
+            {% assign now_epoch = site.time | date: '%s' | plus: 0 %}
+            {% assign weeks = 12 %}
+            {% assign rows = 7 %}
+            <div
+                class="space-y-4 rounded-3xl border border-white/60 bg-white/80 p-6 shadow-sm backdrop-blur"
+            >
+                <div class="flex items-center justify-between text-sm font-medium text-slate-600">
+                    <span>작성 활동</span>
+                    <span class="text-xs text-slate-400">{{ weeks }}주 간 기록</span>
+                </div>
+                <div class="flex gap-1">
+                    {% assign last_week_index = weeks | minus: 1 %}
+                    {% assign last_row_index = rows | minus: 1 %}
+                    {% for week in (0..last_week_index) %}
+                        {% assign grid_rows = 'grid-template-rows: repeat(' | append: rows | append: ', 1fr);' %}
+                        <div class="grid gap-1">
+                            {% for day in (0..last_row_index) %}
+                                {% assign offset_days = week | times: rows | plus: day %}
+                                {% assign offset_seconds = offset_days | times: 86400 %}
+                                {% assign day_epoch = now_epoch | minus: offset_seconds %}
+                                {% assign day_date = day_epoch | date: '%Y-%m-%d' %}
+                                {% assign count = 0 %}
+                                {% for post in site.posts %}
+                                    {% assign post_day = post.date | date: '%Y-%m-%d' %}
+                                    {% if post_day == day_date %}
+                                        {% assign count = count | plus: 1 %}
+                                    {% endif %}
+                                {% endfor %}
+                                {% assign color = 'bg-slate-200/60' %}
+                                {% if count > 0 %}
+                                    {% assign color = 'bg-emerald-200' %}
+                                {% endif %}
+                                {% if count > 1 %}
+                                    {% assign color = 'bg-emerald-400' %}
+                                {% endif %}
+                                {% if count > 3 %}
+                                    {% assign color = 'bg-emerald-600' %}
+                                {% endif %}
+                                <div
+                                    class="h-3 w-3 rounded-sm {{ color }} transition hover:scale-110 hover:border hover:border-emerald-500/50"
+                                    title="{{ day_date }} · {{ count }} post{% if count != 1 %}s{% endif %}"
+                                ></div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="flex items-center justify-end gap-1 text-xs text-slate-400">
+                    <span>Less</span>
+                    <span class="h-3 w-3 rounded-sm bg-slate-200/60"></span>
+                    <span class="h-3 w-3 rounded-sm bg-emerald-200"></span>
+                    <span class="h-3 w-3 rounded-sm bg-emerald-400"></span>
+                    <span class="h-3 w-3 rounded-sm bg-emerald-600"></span>
+                    <span>More</span>
+                </div>
+            </div>
+        </aside>
     </div>
 </section>
