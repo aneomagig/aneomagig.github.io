@@ -18,6 +18,7 @@ def main() -> int:
     metadata_path = Path("latest_post.json")
 
     if not metadata_path.exists():
+        print("latest_post.json not found; setting has_latest=false")
         with output_path.open("a", encoding="utf-8") as handle:
             handle.write("has_latest=false\n")
         return 0
@@ -27,8 +28,10 @@ def main() -> int:
 
     with output_path.open("a", encoding="utf-8") as handle:
         handle.write("has_latest=true\n")
+        print("has_latest=true")
         for key in OUTPUT_KEYS:
             value = str(data.get(key, "") or "")
+            print(f"{key}={value}")
             write_output_line(handle, key, value)
 
     metadata_path.unlink()
