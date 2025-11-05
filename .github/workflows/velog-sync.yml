@@ -50,38 +50,38 @@ jobs:
                   LATEST_FILENAME: ${{ steps.latest.outputs.filename }}
               run: |
                   python3 - <<'PY'
-import json
-import os
-import sys
-import urllib.request
+                  import json
+                  import os
+                  import sys
+                  import urllib.request
 
-webhook = (os.environ.get("DISCORD_WEBHOOK_URL") or "").strip()
-title = (os.environ.get("LATEST_TITLE") or "").strip()
-site_url = (os.environ.get("LATEST_SITE_URL") or "").strip()
-velog_url = (os.environ.get("LATEST_VELOG_URL") or "").strip()
-fallback = (os.environ.get("LATEST_FILENAME") or "").strip()
+                  webhook = (os.environ.get("DISCORD_WEBHOOK_URL") or "").strip()
+                  title = (os.environ.get("LATEST_TITLE") or "").strip()
+                  site_url = (os.environ.get("LATEST_SITE_URL") or "").strip()
+                  velog_url = (os.environ.get("LATEST_VELOG_URL") or "").strip()
+                  fallback = (os.environ.get("LATEST_FILENAME") or "").strip()
 
-if not webhook:
-    print("Missing Discord webhook URL", file=sys.stderr)
-    sys.exit(1)
+                  if not webhook:
+                      print("Missing Discord webhook URL", file=sys.stderr)
+                      sys.exit(1)
 
-label = title or fallback or "새로운 포스트"
-link = site_url or velog_url
+                  label = title or fallback or "새로운 포스트"
+                  link = site_url or velog_url
 
-lines = ["📰 새로운 포스트가 자동으로 업로드되었습니다!", f"✨ {label}"]
-if link:
-    lines.append(f"📖 읽어보기: {link}")
+                  lines = ["📰 새로운 포스트가 자동으로 업로드되었습니다!", f"✨ {label}"]
+                  if link:
+                      lines.append(f"📖 읽어보기: {link}")
 
-message = "\n".join(lines)
-print(message)
+                  message = "\n".join(lines)
+                  print(message)
 
-data = json.dumps({"content": message}, ensure_ascii=False).encode("utf-8")
-req = urllib.request.Request(
-    webhook,
-    data=data,
-    headers={"Content-Type": "application/json"},
-    method="POST",
-)
-with urllib.request.urlopen(req, timeout=15) as resp:
-    print(f"Discord webhook responded with status {resp.status}")
-PY
+                  data = json.dumps({"content": message}, ensure_ascii=False).encode("utf-8")
+                  req = urllib.request.Request(
+                      webhook,
+                      data=data,
+                      headers={"Content-Type": "application/json"},
+                      method="POST",
+                  )
+                  with urllib.request.urlopen(req, timeout=15) as resp:
+                      print(f"Discord webhook responded with status {resp.status}")
+                  PY
