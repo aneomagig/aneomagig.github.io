@@ -53,6 +53,7 @@ jobs:
                   import json
                   import os
                   import sys
+                  import urllib.error
                   import urllib.request
 
                   webhook = (os.environ.get("DISCORD_WEBHOOK_URL") or "").strip()
@@ -79,9 +80,20 @@ jobs:
                   req = urllib.request.Request(
                       webhook,
                       data=data,
-                      headers={"Content-Type": "application/json"},
+                      headers={
+                          "Content-Type": "application/json",
+                          "User-Agent": "GitHubActions/DiscordWebhook (+https://github.com/aneomagig/aneomagig.github.io)",
+                      },
                       method="POST",
                   )
-                  with urllib.request.urlopen(req, timeout=15) as resp:
-                      print(f"Discord webhook responded with status {resp.status}")
+                  try:
+                      with urllib.request.urlopen(req, timeout=15) as resp:
+                          print(f"Discord webhook responded with status {resp.status}")
+                  except urllib.error.HTTPError as exc:
+                      body = exc.read().decode("utf-8", errors="replace")
+                      print(f"Discord webhook HTTPError {exc.code}: {body}", file=sys.stderr)
+                      sys.exit(exc.code if 400 <= exc.code < 600 else 1)
+                  except urllib.error.URLError as exc:
+                      print(f"Discord webhook URLError: {exc}", file=sys.stderr)
+                      sys.exit(1)
                   PY
