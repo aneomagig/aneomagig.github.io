@@ -29,3 +29,59 @@ jobs:
             - name: Capture latest post details
               id: latest
               run: python3 capture_latest_post.py
+
+            - name: Commit & Push changes
+              id: commit
+              run: |
+                  git config user.name "Velog Sync Bot"
+                  git config user.email "actions@github.com"
+                  git add .
+                  git diff --cached --quiet && echo "no_changes=true" >> "$GITHUB_OUTPUT" || echo "no_changes=false" >> "$GITHUB_OUTPUT"
+                  git commit -m "🪄 Auto-sync Velog posts" || echo "No changes"
+                  git push
+
+            - name: Send Discord notification
+              if: success() && steps.commit.outputs.no_changes == 'false' && steps.latest.outputs.has_latest == 'true'
+              env:
+                  DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+                  LATEST_TITLE: ${{ steps.latest.outputs.title }}
+                  LATEST_VELOG_URL: ${{ steps.latest.outputs.velog_url }}
+                  LATEST_SITE_URL: ${{ steps.latest.outputs.site_url }}
+                  LATEST_FILENAME: ${{ steps.latest.outputs.filename }}
+              run: |
+                  python3 - <<'PY'
+import json
+import os
+import sys
+import urllib.request
+
+webhook = (os.environ.get("DISCORD_WEBHOOK_URL") or "").strip()
+title = (os.environ.get("LATEST_TITLE") or "").strip()
+site_url = (os.environ.get("LATEST_SITE_URL") or "").strip()
+velog_url = (os.environ.get("LATEST_VELOG_URL") or "").strip()
+fallback = (os.environ.get("LATEST_FILENAME") or "").strip()
+
+if not webhook:
+    print("Missing Discord webhook URL", file=sys.stderr)
+    sys.exit(1)
+
+label = title or fallback or "새로운 포스트"
+link = site_url or velog_url
+
+lines = ["📰 새로운 포스트가 자동으로 업로드되었습니다!", f"✨ {label}"]
+if link:
+    lines.append(f"📖 읽어보기: {link}")
+
+message = "\n".join(lines)
+print(message)
+
+data = json.dumps({"content": message}, ensure_ascii=False).encode("utf-8")
+req = urllib.request.Request(
+    webhook,
+    data=data,
+    headers={"Content-Type": "application/json"},
+    method="POST",
+)
+with urllib.request.urlopen(req, timeout=15) as resp:
+    print(f"Discord webhook responded with status {resp.status}")
+PY
