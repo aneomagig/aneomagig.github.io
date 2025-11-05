@@ -1,7 +1,3 @@
-# capture_latest_post.py
-import json
-import os
-from pathlib import Path
 from __future__ import annotations
 
 import json
@@ -12,7 +8,7 @@ from pathlib import Path
 OUTPUT_KEYS = ("title", "velog_url", "site_url", "filename")
 
 
-def write_output_line(handle, key, value):
+def write_output_line(handle, key: str, value: str) -> None:
     """Write a multi-line GitHub Action output entry."""
     handle.write(f"{key}<<EOF\n{value}\nEOF\n")
 
