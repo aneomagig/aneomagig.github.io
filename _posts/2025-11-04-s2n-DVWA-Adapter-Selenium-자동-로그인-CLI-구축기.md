@@ -3,10 +3,7 @@ layout: post
 title: "[s2n] DVWA Adapter & Selenium 자동 로그인 CLI 구축기"
 date: 2025-11-04 07:10:57 +0900
 categories: velog
-<<<<<<< HEAD
 series: "s2n"
-=======
->>>>>>> d1b4e8f7e23cea176551339b00230d38b18b6aa0
 ---
 
 <blockquote>
@@ -46,8 +43,4 @@ Selenium으로 자동 로그인 세션을 브라우저까지 띄워주는 구조
 </ol>
 <h3 id="실행-방법">실행 방법</h3>
 <p><img alt="" src="/assets/images/hosooinmymind/images/hosooinmymind/post/7d98bb4c-cee8-4903-95c5-b099f67afd55/image.png"/></p>
-<<<<<<< HEAD
 <p>더 자세한 사항은 &gt;&gt; <a href="https://github.com/504s2n/s2n/pull/8">https://github.com/504s2n/s2n/pull/8</a> &lt;&lt;</p>
-=======
-<p>더 자세한 사항은 &gt;&gt; <a href="https://github.com/504s2n/s2n/pull/8">https://github.com/504s2n/s2n/pull/8</a> &lt;&lt;</p>
->>>>>>> d1b4e8f7e23cea176551339b00230d38b18b6aa0
