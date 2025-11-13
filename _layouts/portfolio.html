@@ -3,3 +3,40 @@ layout: default
 ---
 
 {{ content }}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var lightbox = document.getElementById('gallery-lightbox');
+        if (!lightbox) return;
+        var lightboxImage = document.getElementById('gallery-lightbox-image');
+        var closeBtn = lightbox.querySelector('[data-gallery-close]');
+
+        document.querySelectorAll('[data-gallery-full]').forEach(function (button) {
+            button.addEventListener('click', function () {
+                var fullSrc = button.getAttribute('data-gallery-full');
+                if (!fullSrc) return;
+                lightboxImage.src = fullSrc;
+                lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex');
+            });
+        });
+
+        function hideLightbox() {
+            lightbox.classList.remove('flex');
+            lightbox.classList.add('hidden');
+            lightboxImage.src = '';
+        }
+
+        closeBtn.addEventListener('click', hideLightbox);
+        lightbox.addEventListener('click', function (event) {
+            if (event.target === lightbox) {
+                hideLightbox();
+            }
+        });
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                hideLightbox();
+            }
+        });
+    });
+</script>

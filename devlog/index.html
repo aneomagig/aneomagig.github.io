@@ -62,15 +62,15 @@ title: "Dev Log"
 
         <div class="space-y-5" data-series-list="devlog-posts">
         {% for post in dev_posts %}
-            {% assign thumbnail = post.thumbnail %}
-            {% if thumbnail == nil or thumbnail == "" %}
-                {% assign first_img = post.content | split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:'' | split:'"' | first %}
-                {% if first_img == "" %}
-                    {% assign thumbnail = '/assets/default-thumbnail.jpg' %}
-                {% else %}
-                    {% assign thumbnail = first_img %}
-                {% endif %}
+        {% assign thumbnail = post.thumbnail %}
+        {% if thumbnail == nil or thumbnail == "" %}
+            {% assign first_img = post.content | split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:'' | split:'"' | first | strip | default: '' %}
+            {% if first_img == "" %}
+                {% assign thumbnail = '/assets/default-thumbnail.jpg' %}
+            {% else %}
+                {% assign thumbnail = first_img %}
             {% endif %}
+        {% endif %}
 
             {% assign card_series = post.series %}
             {% if card_series and card_series != '' %}
@@ -106,9 +106,9 @@ title: "Dev Log"
 
                 <div class="flex min-w-0 flex-1 flex-col gap-3">
                     <div class="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-wide text-rose-400">
-                        <span class="rounded-full bg-rose-50 px-3 py-1 text-rose-500">
+                        <!-- <span class="rounded-full bg-rose-50 px-3 py-1 text-rose-500">
                             {{ post.categories | array_to_sentence_string }}
-                        </span>
+                        </span> -->
                         {% if post.series %}
                             <span class="rounded-full bg-indigo-50 px-3 py-1 text-indigo-500">
                                 {{ post.series }}

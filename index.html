@@ -68,15 +68,15 @@ profile:
 
             <div class="space-y-5" data-series-list="home-posts">
             {% for post in home_posts %}
-                {% assign thumbnail = post.thumbnail %}
-                {% if thumbnail == nil or thumbnail == "" %}
-                    {% assign first_img = post.content | split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:'' | split:'"' | first %}
-                    {% if first_img == "" %}
-                        {% assign thumbnail = '/assets/default-thumbnail.jpg' %}
-                    {% else %}
-                        {% assign thumbnail = first_img %}
-                    {% endif %}
+            {% assign thumbnail = post.thumbnail %}
+            {% if thumbnail == nil or thumbnail == "" %}
+                {% assign first_img = post.content | split:'<img' | slice: 1, 1 | join:'' | split:'src="' | slice: 1, 1 | join:'' | split:'"' | first | strip | default: '' %}
+                {% if first_img == "" %}
+                    {% assign thumbnail = '/assets/default-thumbnail.jpg' %}
+                {% else %}
+                    {% assign thumbnail = first_img %}
                 {% endif %}
+            {% endif %}
 
                 {% assign card_series = post.series %}
                 {% if card_series and card_series != '' %}
@@ -161,14 +161,43 @@ profile:
                     <p class="text-sm font-medium text-rose-400">
                         {{ page.profile.role }}
                     </p>
-                    <p class="text-sm leading-relaxed text-slate-600">
+                    <p class=" text-sm leading-relaxed text-slate-600">
                         {{ page.profile.bio }}
                     </p>
                 </div>
-                <div class="flex justify-center gap-4 text-rose-300">
-                    <span title="Contact">✉️</span>
-                    <span title="Projects">🧰</span>
-                    <span title="Community">🤝</span>
+                <div class="flex justify-center gap-4">
+                    <a
+                        href="https://github.com/aneomagig"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/60 bg-white/70 shadow-sm transition hover:-translate-y-1 hover:border-rose-200 hover:bg-white"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label="GitHub"
+                    >
+                        <img
+                            src="{{ '/assets/icons/github-icon.svg' | relative_url }}"
+                            alt="GitHub"
+                            class="h-5 w-5"
+                            width="20"
+                            height="20"
+                            loading="lazy"
+                        />
+                    </a>
+                    <a
+                        href="https://www.linkedin.com/in/minji-kim-1866352b3/"
+                        class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/60 bg-white/70 shadow-sm transition hover:-translate-y-1 hover:border-rose-200 hover:bg-white"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        aria-label="LinkedIn"
+                    >
+                        <img
+                            src="{{ '/assets/icons/linkedin-icon.svg' | relative_url }}"
+                            alt="LinkedIn"
+                            class="h-5 w-5"
+                            width="20"
+                            height="20"
+                            loading="lazy"
+                        />
+                    </a>
                 </div>
             </div>
 
