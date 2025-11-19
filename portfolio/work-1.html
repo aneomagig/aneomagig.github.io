@@ -8,15 +8,15 @@ hero:
     role: "FrontEnd Developer, UI/UX Design"
     period: "2024.11 — 2025.06"
     status: "캡스톤디자인 우수상 수상"
-    cover: "/assets/images/dash-thumbnail.jpg"
+    cover: "/assets/images/work-1/dash-thumbnail.jpg"
     primary_link:
         label: "결과물 보기"
         url: "https://softcon.ajou.ac.kr/works/works_prev.asp?uid=2042&wTerm=2025-1"
 gallery:
-    - "/assets/images/dash-thumbnail.jpg"    
-    - "/assets/images/dash-1.png"    
-    - "/assets/images/dash-2.png"
-    - "/assets/images/dash-3.png"
+    - "/assets/images/work-1/dash-thumbnail.jpg"    
+    - "/assets/images/work-1/dash-1.png"    
+    - "/assets/images/work-1/dash-2.png"
+    - "/assets/images/work-1/dash-3.png"
 ---
 
 <article class="space-y-12">
@@ -124,7 +124,7 @@ gallery:
                 Overview
             </h2>
             <p class="mt-3 text-sm leading-relaxed text-slate-600">
-                프로젝트 목적, 비즈니스 요구사항, 주요 가치 제안을 2~3문장으로 요약합니다.
+                대학교 간식사업 간 발생하는 애로사항을 해결하기 위해 쿠폰 발급 서비스 DASH를 개발했습니다.
             </p>
         </div>
         <div>
@@ -132,9 +132,8 @@ gallery:
                 Responsibilities
             </h2>
             <ul class="mt-3 space-y-2 text-sm text-slate-600">
-                <li>· 핵심 기여 1</li>
-                <li>· 핵심 기여 2</li>
-                <li>· 핵심 기여 3</li>
+                <li>· UX/UI 디자인</li>
+                <li>· 프론트엔드 개발</li>
             </ul>
         </div>
         <div>
@@ -142,10 +141,9 @@ gallery:
                 Tech Stack
             </h2>
             <div class="mt-3 flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
-                <span class="rounded-full bg-slate-100 px-3 py-1">Python</span>
-                <span class="rounded-full bg-slate-100 px-3 py-1">AWS</span>
-                <span class="rounded-full bg-slate-100 px-3 py-1">Terraform</span>
-                <span class="rounded-full bg-slate-100 px-3 py-1">Docker</span>
+                <span class="rounded-full bg-slate-100 px-3 py-1">React</span>
+                <span class="rounded-full bg-slate-100 px-3 py-1">TypeScript</span>
+                <span class="rounded-full bg-slate-100 px-3 py-1">Figma</span>
             </div>
         </div>
     </section>
@@ -155,25 +153,17 @@ gallery:
             <h2 class="font-display text-2xl font-semibold text-slate-900">
                 Problem & Goals
             </h2>
-            <div class="mt-4 grid gap-8 md:grid-cols-2">
+            <div class="mt-4 grid gap-8 ">
                 <div>
                     <p class="text-xs font-semibold uppercase tracking-[0.2em] text-rose-400">
                         Problem Context
                     </p>
                     <p class="mt-2 text-sm leading-relaxed text-slate-600">
-                        기존 상황, 주요 페인포인트, 정량 지표 등을 설명합니다.
+                    - 발행 요청자 (소학회, 총학생회 등): 쿠폰 양식 자체제작 필요, 업장에 개별적으로 연락 후 양해 필요, 쿠폰 수요 미충족 시 예산손실 등의 문제
+                    <br>
+                    - 발행자 (소상공인): 쿠폰 위조 우려, 발행 후 근무자 간 사용 집계 및 인수인계 어려움                       
                     </p>
-                </div>
-                <div>
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-400">
-                        Success Metrics
-                    </p>
-                    <ul class="mt-2 space-y-2 text-sm text-slate-600">
-                        <li>· KPI #1 (예: 배포 시간 40% 단축)</li>
-                        <li>· KPI #2 (예: 장애 재현율 0% 달성)</li>
-                        <li>· KPI #3 (예: 운영 비용 30% 절감)</li>
-                    </ul>
-                </div>
+                </div> 
             </div>
         </div>
     </section>
@@ -183,43 +173,82 @@ gallery:
             Solution Breakdown
         </h2>
         <div class="space-y-4">
-            {% assign steps = "Discovery,Architecture,Implementation,Launch & Measure" | split: "," %}
-            {% for step in steps %}
-                <div class="rounded-3xl border border-slate-200/70 bg-white/95 p-6 shadow-sm">
-                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                        Step {{ forloop.index }}
-                    </p>
-                    <h3 class="mt-2 text-xl font-semibold text-slate-900">{{ step }}</h3>
-                    <p class="mt-2 text-sm leading-relaxed text-slate-600">
-                        단계별 목표와 수행한 작업을 bullet로 요약하세요. 엔지니어링 포인트, 의사결정 근거,
-                        협업 방식 등을 담으면 좋습니다.
-                    </p>
-                </div>
-            {% endfor %}
+            <div class="rounded-3xl border border-slate-200/70 bg-white/95 p-6 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Step 1</p>
+                <h3 class="mt-2 text-xl font-semibold text-slate-900">Discovery</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                    지류쿠폰 형식은 유지하며 온라인 배부 및 쿠폰 유효성 검증 등의 기능을 플랫폼에서 관리할 수 있도록 구성하는 아이디어를 고안헸습니다.
+                    <br>
+                    ‘등록번호’와 ‘결제번호’를 분리하여 시스템 내에서 유효성이 확인된 쿠폰에 대해서만 결제번호를 발급/결제 활성화할 수 있게 했습니다. 
+                    <br>
+                    실제 학생회, 소학회 임원과 인터뷰하고 기존 지류 쿠폰 플로우를 여정지도로 재구성했습니다.
+                    <br>
+                    쿠폰 위조, 승인 지연, 정산 오류를 핵심 페인포인트로 정리하고 이를 해결할 기능 리스트를 도출했습니다.
+                </p>
+            </div>
+            <div class="rounded-3xl border border-slate-200/70 bg-white/95 p-6 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Step 2</p>
+                <h3 class="mt-2 text-xl font-semibold text-slate-900">Architecture</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                    [Front-end]
+                    <br>
+                    - React 웹앱을 통해 관리자 및 사용자에게 실시간 인증 및 쿠폰 관리/통계 기능을 제공합니다. 
+                    <br>
+                    - HTML5-QRCode를 사용해 모바일 웹에서 빠르고 안정적인 실시간 QR 스캔 기능을 구현합니다.
+                    <br><br>
+                    [Back-end]
+                    <br>
+                    - Spring & Java 기반의 Rest API를 개발해 쿠폰 발행 및 결제 활성화를 담당합니다.
+                    <br>
+                    - AWS 환경에 Docker & k8s를 활용해 컨테이너 기반의 자동화 배포 및 분산 처리 환경을 구축했습니다. 
+                    <br>
+                    - Master 노드에는 Argo를 활용한 CI/CD 파이프라인과 워크로드 관리를 설정하고, Worker 노드에서는 실제 API 및 서비스가 구동되도록 합니다.
+                    <br>
+                    - MySQL을 사용해 핵심 데이터를 저장/관리합니다.
+                    <br><br>
+                    [Blockchain Module]
+                    <br>
+                    - Solidity를 통해 쿠폰 유효성 검증 및 소유권 관리를 위한 스마트 컨트랙트를 Ethereum 네트워크에 배포합니다.
+                </p>
+            </div>
+            <div class="rounded-3xl border border-slate-200/70 bg-white/95 p-6 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Step 3</p>
+                <h3 class="mt-2 text-xl font-semibold text-slate-900">Implementation</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                [Front-end]
+                <br>
+                - Tailwind CSS를 활용하여 직관적이고 반응형(Responsive)인 UI 컴포넌트들을 구축하여, 관리자 및 사용자 경험(UX)을 최적화했습니다.
+                <br>
+                - Zustand를 사용하여 전역 상태 관리를 구현함으로써 대시보드의 복잡한 데이터 흐름을 효율적으로 관리했습니다.
+                <br>
+                - React Query를 도입하여 API 캐싱 전략을 수립하고, 서버 상태를 효과적으로 관리하여 불필요한 API 호출을 줄이고 사용자 체감 속도를 향상시켰습니다.
+                <br><br>
+                [Back-end & Infra]
+                <br>
+                - Spring Boot를 사용하여 RESTful API를 개발하고, 명세에 따른 일관적인 JSON 데이터 형식 처리를 구현했습니다.
+                <br>
+                - Kubernetes 환경에 배포 매니페스트를 작성하고, Argo CD를 통해 GitOps 기반의 자동 배포 파이프라인을 구축하여 서비스의 민첩성(Agility)과 안정성(Reliability)을 확보했습니다.
+                <br>
+                - Docker Compose를 활용하여 개발 환경과 테스트 환경을 로컬에서 쉽게 구축 및 통합할 수 있도록 지원했습니다.
+                <br><br>
+                [BlockChain]
+                <br>
+                - Solidity 스마트 컨트랙트를 작성하여 쿠폰의 발행 및 소각 로직, 유효성 검증 로직을 구현했습니다.
+                <br>
+                - 유효성 검증 및 서명 절차를 스마트 컨트랙트 로직에 추가하여, 쿠폰 결제 과정에서의 **보안성(위변조 방지)**을 극대화했습니다.
+                </p>
+            </div>
+            <div class="rounded-3xl border border-slate-200/70 bg-white/95 p-6 shadow-sm">
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Step 4</p>
+                <h3 class="mt-2 text-xl font-semibold text-slate-900">Launch & Measure</h3>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                    베타 릴리스 후 SOFTCON 2024 캡스톤디자인 경진대회 당일, 학교 앞 소상공인과 실제로 협업해 쿠폰을 발급하고, 실제로 서비스를 이용해 상품을 교환할 수 있도록 했습니다.
+                </p>
+            </div>
         </div>
     </section>
 
-    <section
-        class="rounded-[32px] border border-white/80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-white shadow-lg"
-    >
-        <h2 class="font-display text-2xl font-semibold">Impact Snapshot</h2>
-        <div class="mt-6 grid gap-6 md:grid-cols-3">
-            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 text-center">
-                <p class="text-3xl font-bold">+45%</p>
-                <p class="text-sm text-white/70">배포 자동화 이후 Lead Time 개선</p>
-            </div>
-            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 text-center">
-                <p class="text-3xl font-bold">0</p>
-                <p class="text-sm text-white/70">릴리스 후 발견된 크리티컬 이슈</p>
-            </div>
-            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 text-center">
-                <p class="text-3xl font-bold">↓30%</p>
-                <p class="text-sm text-white/70">월간 인프라 비용 절감율</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="space-y-6">
+    <section class="space-y-4">
         <div
             class="rounded-3xl border border-white/70 bg-white/85 p-8 shadow-sm backdrop-blur"
         >
@@ -229,27 +258,59 @@ gallery:
             <p class="mt-3 text-sm text-slate-600">
                 간단한 시스템 다이어그램 또는 플로우 설명을 넣을 영역입니다. Mermaid, 이미지, 표 등 원하는 형식으로 교체하세요.
             </p>
-            <div class="mt-4 rounded-2xl border border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
-                (다이어그램 자리)
-            </div>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2">
-            <div class="rounded-3xl border border-white/70 bg-white/90 p-6 shadow-sm">
-                <h3 class="text-lg font-semibold text-slate-900">Key Learnings</h3>
-                <ul class="mt-3 space-y-2 text-sm text-slate-600">
-                    <li>· 기술적 인사이트 또는 트러블슈팅 경험</li>
-                    <li>· 협업/프로세스 관련 배움</li>
-                    <li>· 다음 프로젝트에 적용할 수 있는 포인트</li>
-                </ul>
-            </div>
-            <div class="rounded-3xl border border-white/70 bg-white/90 p-6 shadow-sm">
-                <h3 class="text-lg font-semibold text-slate-900">Next Steps</h3>
-                <ul class="mt-3 space-y-2 text-sm text-slate-600">
-                    <li>· 추가 개선 아이디어</li>
-                    <li>· 롤아웃 계획 / 확장 전략</li>
-                    <li>· 데이터/모니터링 계획</li>
-                </ul>
+            <div class="mt-4 rounded-2xl border border-dashed border-slate-200 bg-white/95 p-6 text-sm text-slate-600">
+                <pre class="mermaid whitespace-pre-wrap break-words text-left">
+flowchart TD
+    %% 외부 엔티티
+    User[👤 일반 사용자<br/>User]
+    Vendor[🏪 쿠폰 발행 요청자<br/>Vendor]
+    Partner[🏢 소상공인<br/>Partner]
+    Blockchain[⛓️ 블록체인 모듈<br/>Blockchain Module]
+    
+    %% 중앙 프로세스
+    CouponSystem((쿠폰 관리<br/>시스템<br/>0))
+    
+    %% 데이터 저장소
+    UserDB[(D1 사용자 정보)]
+    RequestDB[(D2 쿠폰 발행<br/>요청 내역)]
+    CouponIssueDB[(D3 쿠폰 발행<br/>내역)]
+    CouponDB[(D4 쿠폰 정보)]
+    NotificationDB[(D5 알림)]
+    
+    %% 외부 엔티티 -> 시스템
+    Vendor -->|쿠폰 발행 요청서| CouponSystem
+    Partner -->|요청서 승인/거절| CouponSystem
+    Partner -->|쿠폰 유효성 검증 요청| CouponSystem
+    User -->|쿠폰 등록| CouponSystem
+    User -->|쿠폰 사용 요청| CouponSystem
+    
+    %% 시스템 -> 외부 엔티티
+    CouponSystem -->|발행 요청 알림| Partner
+    CouponSystem -->|승인/거절 결과| Vendor
+    CouponSystem -->|쿠폰 발행 정보| Vendor
+    CouponSystem -->|실시간 결제 코드| User
+    CouponSystem -->|쿠폰 사용 처리 결과| Partner
+    CouponSystem -->|알림| User
+    
+    %% 시스템 <-> 블록체인
+    CouponSystem <-->|쿠폰 유효성 데이터| Blockchain
+    
+    %% 시스템 <-> 데이터베이스
+    CouponSystem <--> UserDB
+    CouponSystem <--> RequestDB
+    CouponSystem <--> CouponIssueDB
+    CouponSystem <--> CouponDB
+    CouponSystem <--> NotificationDB
+    
+    %% 스타일링
+    classDef entity fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef process fill:#f3e5f5,stroke:#4a148c,stroke-width:3px
+    classDef datastore fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    
+    class User,Vendor,Partner,Blockchain entity
+    class CouponSystem process
+    class UserDB,RequestDB,CouponIssueDB,CouponDB,NotificationDB datastore
+                </pre>
             </div>
         </div>
     </section>
