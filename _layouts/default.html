@@ -18,6 +18,16 @@
                 border-color: rgba(244, 114, 182, 0.9);
                 color: #fff;
             }
+            .mermaid-diagram-shell {
+                border-radius: 1.5rem;
+                background: linear-gradient(145deg, rgba(255, 241, 242, 0.8), rgba(255, 255, 255, 0.9));
+                border: 1px solid rgba(248, 113, 113, 0.2);
+                box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
+                padding: 1.5rem;
+            }
+            .mermaid {
+                font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+            }
         </style>
     </head>
     {% assign background_image = page.body_background | default: '/assets/images/home/background.png' %}
@@ -90,6 +100,27 @@
         <footer class="mx-auto max-w-5xl px-6 pb-12 text-sm text-slate-500">
             © {{ site.time | date: '%Y' }} Minji
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.mermaid) {
+                    mermaid.initialize({
+                        startOnLoad: true,
+                        theme: 'base',
+                        themeVariables: {
+                            primaryColor: '#ffe4e6',
+                            primaryBorderColor: '#fb7185',
+                            primaryTextColor: '#0f172a',
+                            lineColor: '#f472b6',
+                            secondaryColor: '#fdf2f8',
+                            tertiaryColor: '#e2e8f0',
+                            background: '#ffffff',
+                            fontFamily: 'Poppins, "Noto Sans KR", sans-serif'
+                        }
+                    });
+                }
+            });
+        </script>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 document.querySelectorAll('[data-series-filter-group]').forEach(function (container) {

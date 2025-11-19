@@ -1,0 +1,258 @@
+---
+layout: portfolio
+title: "DASH · Project Detail"
+permalink: /portfolio/work-2/
+hero:
+    title: "DASH"
+    subtitle: "소상공인을 위한 쿠폰 발급 서비스"
+    role: "FrontEnd Developer, UI/UX Design"
+    period: "2024.11 — 2025.06"
+    status: "캡스톤디자인 우수상 수상"
+    cover: "/assets/images/dash-thumbnail.jpg"
+    primary_link:
+        label: "결과물 보기"
+        url: "https://softcon.ajou.ac.kr/works/works_prev.asp?uid=2042&wTerm=2025-1"
+gallery:
+    - "/assets/images/dash-thumbnail.jpg"    
+    - "/assets/images/dash-1.png"    
+    - "/assets/images/dash-2.png"
+    - "/assets/images/dash-3.png"
+---
+
+<article class="space-y-12">
+    <header
+        class="rounded-[32px] border border-white/80 bg-white/90 p-8 shadow-sm backdrop-blur space-y-8"
+    >
+        <div class="space-y-3">
+            <p class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-400">
+                Featured Work
+            </p>
+            <h1 class="font-display text-4xl font-semibold text-slate-900">
+                {{ page.hero.title }}
+            </h1>
+            <p class="text-lg leading-relaxed text-slate-600">
+                {{ page.hero.subtitle }}
+            </p>
+        </div>
+        <div class="flex flex-wrap gap-4">
+            {% if page.hero.primary_link %}
+                <a
+                    class="inline-flex items-center gap-2 rounded-full bg-rose-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-600"
+                    href="{{ page.hero.primary_link.url }}"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                >
+                    {{ page.hero.primary_link.label }}
+                    <span aria-hidden="true">↗</span>
+                </a>
+            {% endif %}
+            {% if page.hero.secondary_link %}
+                <a
+                    class="inline-flex items-center gap-2 rounded-full border border-rose-200 px-5 py-3 text-sm font-semibold text-rose-500 transition hover:border-rose-400 hover:text-rose-600"
+                    href="{{ page.hero.secondary_link.url }}"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                >
+                    {{ page.hero.secondary_link.label }}
+                </a>
+            {% endif %}
+        </div>
+        <div class="rounded-3xl border border-slate-100 bg-white p-6 text-lg text-slate-600 shadow-sm">
+                <div>{{ page.hero.role }}</div>
+                <div class="text-slate-400">{{ page.hero.period }}</div>
+                <div class="text-black-600">{{ page.hero.status }}</div>
+        </div>
+    </header>
+
+{% assign gallery_images = page.gallery %}
+{% if gallery_images == nil or gallery_images == empty %}
+    {% assign gallery_images = page.hero.cover | split: '||' %}
+{% endif %}
+<section
+        class="rounded-[32px] border border-white/70 bg-white/90 p-6 shadow-sm backdrop-blur"
+    >
+        <div class="mb-4 flex items-center justify-between">
+            <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-400">
+                Project Gallery
+            </h2>
+            <span class="text-xs text-slate-400">가로 스크롤로 더 보기</span>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {% for image in gallery_images %}
+                <button
+                    type="button"
+                    class="gallery-card overflow-hidden rounded-2xl border border-slate-100/70 bg-slate-50 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-300"
+                    data-gallery-full="{{ image | relative_url }}"
+                >
+                    <img
+                        src="{{ image | relative_url }}"
+                        alt="프로젝트 이미지 {{ forloop.index }}"
+                        class="h-40 w-full object-cover"
+                        loading="lazy"
+                    />
+                </button>
+            {% endfor %}
+        </div>
+</section>
+
+<div
+    id="gallery-lightbox"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/80 p-4"
+>
+    <button
+        type="button"
+        class="absolute right-6 top-6 rounded-full border border-white/40 bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white"
+        data-gallery-close
+    >
+        닫기 ✕
+    </button>
+    <div class="max-h-full max-w-5xl overflow-hidden rounded-3xl border border-white/20 bg-white/90 p-3 shadow-2xl">
+        <img
+            id="gallery-lightbox-image"
+            src=""
+            alt="확대된 프로젝트 이미지"
+            class="max-h-[80vh] w-full object-contain"
+        />
+    </div>
+</div>
+
+    <section
+        class="grid gap-6 rounded-[32px] border border-white/70 bg-white/85 p-8 shadow-sm backdrop-blur lg:grid-cols-3"
+    >
+        <div>
+            <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-400">
+                Overview
+            </h2>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600">
+                대학교 간식사업 간 발생하는 애로사항을 해결하기 위해 쿠폰 발급 서비스 DASH를 개발했습니다.
+                <br>
+                - 발행 요청자 (소학회, 총학생회 등): 쿠폰 양식 자체제작 필요, 업장에 개별적으로 연락 후 양해 필요, 쿠폰 수요 미충족 시 예산손실 등의 문제
+                <br>
+                - 발행자 (소상공인): 쿠폰 위조 우려, 발행 후 근무자 간 사용 집계 및 인수인계 어려움
+            </p>
+        </div>
+        <div>
+            <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-400">
+                Responsibilities
+            </h2>
+            <ul class="mt-3 space-y-2 text-sm text-slate-600">
+                <li>· UX/UI 디자인</li>
+                <li>· 프론트엔드 개발</li>
+            </ul>
+        </div>
+        <div>
+            <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-rose-400">
+                Tech Stack
+            </h2>
+            <div class="mt-3 flex flex-wrap gap-2 text-xs font-semibold text-slate-500">
+                <span class="rounded-full bg-slate-100 px-3 py-1">React</span>
+                <span class="rounded-full bg-slate-100 px-3 py-1">TypeScript</span>
+                <span class="rounded-full bg-slate-100 px-3 py-1">Figma</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-y-6">
+        <div class="rounded-3xl border border-white/70 bg-white/90 p-8 shadow-sm backdrop-blur">
+            <h2 class="font-display text-2xl font-semibold text-slate-900">
+                Problem & Goals
+            </h2>
+            <div class="mt-4 grid gap-8 md:grid-cols-2">
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-rose-400">
+                        Problem Context
+                    </p>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                        기존 상황, 주요 페인포인트, 정량 지표 등을 설명합니다.
+                    </p>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-400">
+                        Success Metrics
+                    </p>
+                    <ul class="mt-2 space-y-2 text-sm text-slate-600">
+                        <li>· KPI #1 (예: 배포 시간 40% 단축)</li>
+                        <li>· KPI #2 (예: 장애 재현율 0% 달성)</li>
+                        <li>· KPI #3 (예: 운영 비용 30% 절감)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-y-4">
+        <h2 class="font-display text-2xl font-semibold text-slate-900">
+            Solution Breakdown
+        </h2>
+        <div class="space-y-4">
+            {% assign steps = "Discovery,Architecture,Implementation,Launch & Measure" | split: "," %}
+            {% for step in steps %}
+                <div class="rounded-3xl border border-slate-200/70 bg-white/95 p-6 shadow-sm">
+                    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                        Step {{ forloop.index }}
+                    </p>
+                    <h3 class="mt-2 text-xl font-semibold text-slate-900">{{ step }}</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                        단계별 목표와 수행한 작업을 bullet로 요약하세요. 엔지니어링 포인트, 의사결정 근거,
+                        협업 방식 등을 담으면 좋습니다.
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section
+        class="rounded-[32px] border border-white/80 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 text-white shadow-lg"
+    >
+        <h2 class="font-display text-2xl font-semibold">Impact Snapshot</h2>
+        <div class="mt-6 grid gap-6 md:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 text-center">
+                <p class="text-3xl font-bold">+45%</p>
+                <p class="text-sm text-white/70">배포 자동화 이후 Lead Time 개선</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 text-center">
+                <p class="text-3xl font-bold">0</p>
+                <p class="text-sm text-white/70">릴리스 후 발견된 크리티컬 이슈</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/10 p-5 text-center">
+                <p class="text-3xl font-bold">↓30%</p>
+                <p class="text-sm text-white/70">월간 인프라 비용 절감율</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="space-y-6">
+        <div
+            class="rounded-3xl border border-white/70 bg-white/85 p-8 shadow-sm backdrop-blur"
+        >
+            <h2 class="font-display text-2xl font-semibold text-slate-900">
+                Architecture / Flow
+            </h2>
+            <p class="mt-3 text-sm text-slate-600">
+                간단한 시스템 다이어그램 또는 플로우 설명을 넣을 영역입니다. Mermaid, 이미지, 표 등 원하는 형식으로 교체하세요.
+            </p>
+            <div class="mt-4 rounded-2xl border border-dashed border-slate-200 p-6 text-center text-sm text-slate-400">
+                (다이어그램 자리)
+            </div>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2">
+            <div class="rounded-3xl border border-white/70 bg-white/90 p-6 shadow-sm">
+                <h3 class="text-lg font-semibold text-slate-900">Key Learnings</h3>
+                <ul class="mt-3 space-y-2 text-sm text-slate-600">
+                    <li>· 기술적 인사이트 또는 트러블슈팅 경험</li>
+                    <li>· 협업/프로세스 관련 배움</li>
+                    <li>· 다음 프로젝트에 적용할 수 있는 포인트</li>
+                </ul>
+            </div>
+            <div class="rounded-3xl border border-white/70 bg-white/90 p-6 shadow-sm">
+                <h3 class="text-lg font-semibold text-slate-900">Next Steps</h3>
+                <ul class="mt-3 space-y-2 text-sm text-slate-600">
+                    <li>· 추가 개선 아이디어</li>
+                    <li>· 롤아웃 계획 / 확장 전략</li>
+                    <li>· 데이터/모니터링 계획</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</article>
