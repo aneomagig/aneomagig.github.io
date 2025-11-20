@@ -3,6 +3,7 @@ layout: post
 title: "[side project] 🧨 Mac에서 Wazuh Docker로 돌리려다가 삽질한 기록"
 date: 2025-11-14 06:34:34 +0900
 categories: velog
+series: "Side Project"
 thumbnail: "/assets/images/hosooinmymind/images/hosooinmymind/post/07e7fab0-eeae-4f30-a1ca-e9b22a314243/image.png"
 ---
 

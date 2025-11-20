@@ -3,6 +3,7 @@ layout: post
 title: "[Side Project] 🪄 Velog 글을 자동으로 GitHub Pages 블로그로 동기화하기 (with Jekyll + GitHub Actions) + Discord 알림까지 전송하기!"
 date: 2025-10-29 08:15:14 +0900
 categories: velog
+series: "Side Project"
 thumbnail: "/assets/images/hosooinmymind/images/hosooinmymind/post/c51c6155-3418-4ed1-a67a-708c544d589d/image.png"
 ---
 
